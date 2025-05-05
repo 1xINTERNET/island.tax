@@ -1,10 +1,7 @@
 {
-  "name": "@island.demo/tax.refund",
+  "name": "@island.demo/tax",
   "version": "0.0.1",
   "private": true,
-  "nx": {
-    "name": "tax.refund"
-  },
   "dependencies": {
     "next": "~15.2.4",
     "react": "19.0.0",

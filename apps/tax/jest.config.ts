@@ -1,5 +1,5 @@
 export default {
-  displayName: 'tax.refund',
+  displayName: '@island.demo/tax',
   preset: '../../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',

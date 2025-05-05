@@ -8,6 +8,18 @@
     },
     {
       "path": "./apps/tax.refund"
+    },
+    {
+      "path": "./apps/tax-graphql-api-e2e"
+    },
+    {
+      "path": "./apps/tax-graphql-api"
+    },
+    {
+      "path": "./apps/tax-e2e"
+    },
+    {
+      "path": "./apps/tax"
     }
   ]
 }

@@ -29,8 +29,8 @@
     "src/**/*.tsx",
     "src/**/*.js",
     "src/**/*.jsx",
-    "../../apps/tax.refund/.next/types/**/*.ts",
-    "../../dist/apps/tax.refund/.next/types/**/*.ts",
+    "../../apps/tax/.next/types/**/*.ts",
+    "../../dist/apps/tax/.next/types/**/*.ts",
     "next-env.d.ts"
   ],
   "exclude": [
