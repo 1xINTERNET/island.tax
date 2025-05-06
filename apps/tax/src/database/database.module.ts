@@ -10,7 +10,7 @@ import { Liability } from '../tax-return/liability.model';
   imports: [
     SequelizeModule.forRoot({
       dialect: 'sqlite',
-      storage: process.env.DB_PATH || 'database.sqlite',
+      storage: 'database.sqlite',
       autoLoadModels: true,
       synchronize: true, // set false in production, use migrations
       models: [User, TaxReturn, Income, Asset, Liability],
