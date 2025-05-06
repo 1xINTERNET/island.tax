@@ -1,0 +1,45 @@
+{
+  "name": "actions-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:island-is/island.is.git",
+  "author": "DevOps team",
+  "license": "MIT",
+  "engines": {
+    "npm": "please-use-yarn",
+    "node": "18.12.0",
+    "yarn": "4.6"
+  },
+  "volta": {
+    "node": "18.12.0",
+    "yarn": "4.6.0"
+  },
+  "packageManager": "yarn@4.6.0",
+  "scripts": {
+    "build": "yarn run esbuild main.ts --outdir=./dist --platform=node --bundle",
+    "test": "./node_modules/.bin/jest"
+  },
+  "dependencies": {
+    "@octokit/action": "^4.0.10",
+    "@octokit/core": "^3.5.1",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {
+    "@fluffy-spoon/substitute": "^1.208.0",
+    "@octokit/rest": "19.0.13",
+    "@types/debug": "4.1.12",
+    "@types/jest": "^27.4.1",
+    "@types/node": "20.17.41",
+    "debug": "4.4.0",
+    "esbuild": "0.25.4",
+    "esbuild-runner": "2.2.2",
+    "jest": "27.5.1",
+    "ts-jest": "27.1.5",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.9.5",
+    "unzipper": "0.12.3"
+  },
+  "resolutions": {
+    "hosted-git-info": "^2.8.9"
+  }
+}
