@@ -35,33 +35,14 @@
     },
     "docker-test": {
       "runner": "@nx/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": [],
-        "cacheDirectory": ".cache/nx"
-      }
+      "options": { "cacheableOperations": [], "cacheDirectory": ".cache/nx" }
     }
   },
   "generators": {
-    "@nrwl/nx-plugin": {
-      "plugin": {
-        "linter": "eslint"
-      }
-    },
-    "@nx/workspace": {
-      "library": {
-        "linter": "eslint"
-      }
-    },
-    "@nx/cypress": {
-      "cypress-project": {
-        "linter": "eslint"
-      }
-    },
-    "@nx/web": {
-      "application": {
-        "linter": "eslint"
-      }
-    },
+    "@nrwl/nx-plugin": { "plugin": { "linter": "eslint" } },
+    "@nx/workspace": { "library": { "linter": "eslint" } },
+    "@nx/cypress": { "cypress-project": { "linter": "eslint" } },
+    "@nx/web": { "application": { "linter": "eslint" } },
     "@nx/react": {
       "application": {
         "style": "scss",
@@ -70,9 +51,7 @@
         "pascalCaseFiles": true,
         "babel": true
       },
-      "component": {
-        "style": "scss"
-      },
+      "component": { "style": "scss" },
       "library": {
         "style": "scss",
         "linter": "eslint",
@@ -80,32 +59,15 @@
       }
     },
     "@nx/node": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      }
+      "application": { "linter": "eslint" },
+      "library": { "linter": "eslint" }
     },
     "@nx/express": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      }
+      "application": { "linter": "eslint" },
+      "library": { "linter": "eslint" }
     },
-    "@nx/nest": {
-      "application": {
-        "linter": "eslint"
-      }
-    },
-    "@nx/next": {
-      "application": {
-        "style": "scss",
-        "linter": "eslint"
-      }
-    }
+    "@nx/nest": { "application": { "linter": "eslint" } },
+    "@nx/next": { "application": { "style": "scss", "linter": "eslint" } }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
@@ -113,13 +75,8 @@
       "dependsOn": ["^build"],
       "inputs": ["production", "^production", "DevOps"]
     },
-    "e2e": {
-      "inputs": ["default", "^production"],
-      "cache": true
-    },
-    "lint": {
-      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
-    },
+    "e2e": { "inputs": ["default", "^production"], "cache": true },
+    "lint": { "inputs": ["default", "{workspaceRoot}/.eslintrc.json"] },
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
     },
@@ -147,15 +104,8 @@
     "@nx/jest:jest": {
       "cache": true,
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
-      "options": {
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
-      }
+      "options": { "passWithNoTests": true },
+      "configurations": { "ci": { "ci": true, "codeCoverage": true } }
     },
     "@nx/eslint:lint": {
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
@@ -174,16 +124,8 @@
   },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "forceRebuild": [
-      {
-        "runtime": "node .github/actions/force-build.mjs"
-      }
-    ],
-    "nodeVersion": [
-      {
-        "runtime": "node --version"
-      }
-    ],
+    "forceRebuild": [{ "runtime": "node .github/actions/force-build.mjs" }],
+    "nodeVersion": [{ "runtime": "node --version" }],
     "DevOps": ["CI", "Dockerfiles", "{workspaceRoot}/scripts/**/*"],
     "CI": [
       "{workspaceRoot}/.github/actions/",
@@ -214,22 +156,17 @@
       "!{projectRoot}/src/test-setup.[jt]s"
     ],
     "graphql-files": [
-      {
-        "runtime": "node scripts/hash-files apps/api/src/api.graphql"
-      },
+      { "runtime": "node scripts/hash-files apps/api/src/api.graphql" },
       "{projectRoot}/codegen.yml",
       "{projectRoot}/**/*.graphql"
     ],
     "schema-files": [
       "{projectRoot}/**/clientConfig.@(yml|yaml|json)",
-      {
-        "dependentTasksOutputFiles": "**/openapi.@(yml|yaml|json)"
-      },
-      {
-        "dependentTasksOutputFiles": "**/api.graphql"
-      }
+      { "dependentTasksOutputFiles": "**/openapi.@(yml|yaml|json)" },
+      { "dependentTasksOutputFiles": "**/api.graphql" }
     ]
   },
   "useInferencePlugins": false,
-  "defaultBase": "main"
+  "defaultBase": "main",
+  "nxCloudAccessToken": "Yzg2YjljMTktMzQ0YS00YmE2LThmMTMtY2ZhOTY3ODNiZDJjfHJlYWQtd3JpdGU="
 }
