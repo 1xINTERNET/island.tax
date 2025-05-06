@@ -1,26 +1,14 @@
 import React from 'react'
-import { Header, Box, Divider, Page } from '@island.is/island-ui/core'
+
+import { Box } from '@island.is/island-ui/core'
+import { withMainLayout } from '@island.is/tax/layouts/main'
+import type { Screen } from '@island.is/tax/types'
 
 const Home = () => {
-
   return (
-    <div>
-      <Page>
-        <Box padding="containerGutter">
-          <Header />
-        </Box>
-        <Box padding="containerGutter">
-          <h1>Heading 1</h1>
-        </Box>
-        <Divider />
-        <Box padding="containerGutter">
-          <h2>Heading 2</h2>
-        </Box>
-        <Box padding="containerGutter">
-          <p>Paragraph</p>
-        </Box>
-      </Page>
-    </div>
+    <Box>
+      Test
+    </Box>
   )
 }
 
@@ -28,4 +16,4 @@ Home.getInitialProps = async () => {
   return {}
 }
 
-export default Home
+export default withMainLayout(Home)
