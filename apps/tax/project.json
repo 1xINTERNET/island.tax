@@ -1,0 +1,105 @@
+{
+  "name": "tax",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/tax",
+  "projectType": "application",
+  "tags": ["scope:react-next"],
+  "generators": {},
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/tax"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/tax"
+        },
+        "production": {}
+      },
+      "dependsOn": ["build-custom-server"]
+    },
+    "build-custom-server": {
+      "executor": "@nx/webpack:webpack",
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/tax",
+        "main": "apps/tax/server.ts",
+        "tsConfig": "apps/tax/tsconfig.server.json",
+        "maxWorkers": 2,
+        "assets": [],
+        "compiler": "tsc",
+        "target": "node",
+        "webpackConfig": "apps/tax/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "tax:build",
+        "dev": true,
+        "customServerTarget": "tax:serve-custom-server"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "tax:build:development",
+          "dev": true,
+          "customServerTarget": "tax:serve-custom-server:development"
+        },
+        "production": {
+          "buildTarget": "tax:build:production",
+          "dev": false,
+          "customServerTarget": "tax:serve-custom-server:production"
+        }
+      }
+    },
+    "serve-custom-server": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "tax:build-custom-server"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "tax:build-custom-server:development"
+        },
+        "production": {
+          "buildTarget": "tax:build-custom-server:production"
+        }
+      }
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "tax:build:production"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/tax/jest.config.ts"
+      },
+      "outputs": ["{workspaceRoot}/coverage/apps/tax"]
+    },
+    "extract-strings": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn ts-node -P libs/localization/tsconfig.lib.json libs/localization/scripts/extract 'apps/tax/{screens,pages,components}/*.{js,ts,tsx}'"
+      }
+    }
+  }
+}
