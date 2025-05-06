@@ -15628,6 +15628,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nrwl/nx-cloud@npm:19.1.0":
+  version: 19.1.0
+  resolution: "@nrwl/nx-cloud@npm:19.1.0"
+  dependencies:
+    nx-cloud: "npm:19.1.0"
+  checksum: 10/ecae86aa0af80fb5d82f7f1cfc8e985231624f19b0131237a891895804def6f20a3c69fb2dbab020889b0351361ba9e9108a104c6f40243b029a7f98868a0042
+  languageName: node
+  linkType: hard
+
 "@nrwl/react-native@npm:19.4.0":
   version: 19.4.0
   resolution: "@nrwl/react-native@npm:19.4.0"
@@ -38252,6 +38261,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ini@npm:4.1.3":
+  version: 4.1.3
+  resolution: "ini@npm:4.1.3"
+  checksum: 10/f536b414d1442e5b233429e2b56efcdb354109b2d65ddd489e5939d8f0f5ad23c88aa2b19c92987249d0dd63ba8192e9aeb1a02b0459549c5a9ff31acd729a5d
+  languageName: node
+  linkType: hard
+
 "ini@npm:^1.3.4, ini@npm:~1.3.0":
   version: 1.3.8
   resolution: "ini@npm:1.3.8"
@@ -39864,6 +39880,7 @@ __metadata:
     nodemailer: "npm:6.10.0"
     nodemailer-mock: "npm:2.0.6"
     nx: "npm:19.4.0"
+    nx-cloud: "npm:latest"
     oidc-client-ts: "npm:2.4.0"
     openapi3-ts: "npm:2.0.0"
     opossum: "npm:6.1.0"
@@ -46474,7 +46491,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-machine-id@npm:1.1.12":
+"node-machine-id@npm:1.1.12, node-machine-id@npm:^1.1.12":
   version: 1.1.12
   resolution: "node-machine-id@npm:1.1.12"
   checksum: 10/46bf3d4fab8d0e63b24c42bcec2b6975c7ec5bc16e53d7a589d095668d0fdf0bfcbcdc28246dd1ef74cf95a37fbd774cd4b17b41f518d79dfad7fdc99f995903
@@ -46784,6 +46801,26 @@ __metadata:
   version: 2.2.5
   resolution: "nwsapi@npm:2.2.5"
   checksum: 10/8ea6224311fc80dd8d8c68e4ef16de696528104087d9fad9ba5602cf209267bf8d8590de3bdc2fb61f2be773a9f1bd39aac2f5c4b1f6faed4805673fad9cd11f
+  languageName: node
+  linkType: hard
+
+"nx-cloud@npm:19.1.0, nx-cloud@npm:latest":
+  version: 19.1.0
+  resolution: "nx-cloud@npm:19.1.0"
+  dependencies:
+    "@nrwl/nx-cloud": "npm:19.1.0"
+    axios: "npm:^1.6.0"
+    chalk: "npm:^4.1.0"
+    dotenv: "npm:~10.0.0"
+    fs-extra: "npm:^11.1.0"
+    ini: "npm:4.1.3"
+    node-machine-id: "npm:^1.1.12"
+    open: "npm:~8.4.0"
+    tar: "npm:6.2.1"
+    yargs-parser: "npm:>=21.1.1"
+  bin:
+    nx-cloud: bin/nx-cloud.js
+  checksum: 10/c4cfaac8b048580e6d0b18d1cc6c94107762c91fc9530806465a7286f2fff924bc98914883ddb052c53c4066fbe2bfe19674f69729e28fe4928e25dd1e911828
   languageName: node
   linkType: hard
 
@@ -47354,7 +47391,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"open@npm:^8.0.4, open@npm:^8.0.9, open@npm:^8.3.0":
+"open@npm:^8.0.4, open@npm:^8.0.9, open@npm:^8.3.0, open@npm:~8.4.0":
   version: 8.4.2
   resolution: "open@npm:8.4.2"
   dependencies:
@@ -59634,7 +59671,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs-parser@npm:21.1.1, yargs-parser@npm:^21.0.1, yargs-parser@npm:^21.1.1":
+"yargs-parser@npm:21.1.1, yargs-parser@npm:>=21.1.1, yargs-parser@npm:^21.0.1, yargs-parser@npm:^21.1.1":
   version: 21.1.1
   resolution: "yargs-parser@npm:21.1.1"
   checksum: 10/9dc2c217ea3bf8d858041252d43e074f7166b53f3d010a8c711275e09cd3d62a002969a39858b92bbda2a6a63a585c7127014534a560b9c69ed2d923d113406e
