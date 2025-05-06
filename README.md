@@ -52,8 +52,8 @@ Devcontainers provide a consistent development environment using Docker containe
 
    - Docker
    - Visual Studio Code (VS Code) with the Remote - Containers extension
-2. **Using Devcontainers**:
 
+2. **Using Devcontainers**:
    - Refer to the [Devcontainers documentation](https://code.visualstudio.com/docs/remote/containers) for detailed instructions on setting up and using Devcontainers with VS Code.
 
 ### devcontainers-cli Tool

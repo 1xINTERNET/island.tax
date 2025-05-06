@@ -806,11 +806,11 @@ components:
         created:
           format: date-time
           type: string
-          example: '2025-05-06T13:31:35.538Z'
+          example: '2025-05-06T12:51:43.540Z'
         updated:
           format: date-time
           type: string
-          example: '2025-05-06T13:31:35.538Z'
+          example: '2025-05-06T12:51:43.540Z'
         read:
           type: boolean
           example: false
