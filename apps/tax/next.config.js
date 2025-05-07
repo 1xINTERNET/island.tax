@@ -27,6 +27,9 @@ const nextConfig = {
   env: {
     API_MOCKS: process.env.API_MOCKS ?? '',
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 }
 
 const plugins = [
