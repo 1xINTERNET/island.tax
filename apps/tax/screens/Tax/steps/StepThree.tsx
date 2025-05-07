@@ -24,7 +24,7 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
       padding={[3, 3, 10]}
       marginY={4}
     >
-      <Text variant="h2" paddingBottom={2}>
+      <Text variant="h2" paddingBottom={4}>
         Launatekjur og starfstengdar greiðslur
       </Text>
 
