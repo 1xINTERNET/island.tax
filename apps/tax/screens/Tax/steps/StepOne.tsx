@@ -1,6 +1,13 @@
 import { Box, Checkbox, Icon, Text } from '@island.is/island-ui/core'
 
-const StepOne = () => {
+import Buttons from '../Buttons'
+
+type StepOneProps = {
+  onForward: () => void
+  onBackward: () => void
+}
+
+const StepOne = ({ onForward, onBackward }: StepOneProps) => {
   return (
     <Box
       background="white"
@@ -45,6 +52,8 @@ const StepOne = () => {
           subLabel="Ég skil að ofangreind gögn verði sótt rafrænt."
         />
       </Box>
+
+      <Buttons onBackward={onBackward} onForward={onForward}></Buttons>
     </Box>
   )
 }

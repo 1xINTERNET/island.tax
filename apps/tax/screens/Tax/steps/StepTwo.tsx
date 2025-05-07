@@ -8,9 +8,16 @@ import {
   Text,
   Typography,
 } from '@island.is/island-ui/core'
-import { fieldWrapper } from '@island.is/tax/screens/StepTwo.css'
+import { fieldWrapper } from '@island.is/tax/screens/Tax/steps/StepTwo.css'
 
-const StepTwo = () => {
+import Buttons from '../Buttons'
+
+type StepTwoProps = {
+  onForward: () => void
+  onBackward: () => void
+}
+
+const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
   return (
     <Box
       background="white"
@@ -111,12 +118,13 @@ const StepTwo = () => {
         </GridRow>
       </GridContainer>
 
-      <Box paddingY={2}>
+      <Box paddingY={3}>
         <AlertMessage
           type="info"
           message="Ef netfang og símanúmer er ekki rétt hér að ofan þá verður að breyta þeim upplýsingum á mínum síðum Ísland.is"
         />
       </Box>
+      <Buttons onBackward={onBackward} onForward={onForward}></Buttons>
     </Box>
   )
 }
