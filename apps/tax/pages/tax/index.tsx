@@ -5,6 +5,8 @@ import FormStepsLayout from '@island.is/tax/screens/Layouts/FormStepsLayout'
 import StepFive from '@island.is/tax/screens/Tax/steps/StepFive'
 import StepFour from '@island.is/tax/screens/Tax/steps/StepFour'
 import StepOne from '@island.is/tax/screens/Tax/steps/StepOne'
+import StepSeven from '@island.is/tax/screens/Tax/steps/StepSeven'
+import StepSix from '@island.is/tax/screens/Tax/steps/StepSix'
 import StepThree from '@island.is/tax/screens/Tax/steps/StepThree'
 import StepTwo from '@island.is/tax/screens/Tax/steps/StepTwo'
 
@@ -48,9 +50,9 @@ const Tax = ({ taxInfo }) => {
       case 4:
         return <StepFive onForward={onForward} onBackward={onBackward}></StepFive>
       case 5:
-        return <div>Step6</div>
+        return <StepSix onForward={onForward} onBackward={onBackward}></StepSix>
       case 6:
-        return <div>Step7</div>
+        return <StepSeven onForward={onForward} onBackward={onBackward}></StepSeven>
       default:
         break
     }
