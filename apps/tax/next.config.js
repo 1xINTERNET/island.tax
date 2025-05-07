@@ -14,6 +14,7 @@ const nextConfig = {
     if (!dev && isServer) {
       config.devtool = 'source-map'
     }
+    config.cache = false; // Disable caching for server builds
     return config
   },
   serverRuntimeConfig: {
