@@ -1032,11 +1032,11 @@ components:
         validFrom:
           format: date-time
           type: string
-          example: 2025-05-06T07:40:11.453Z
+          example: 2025-05-06T09:53:29.098Z
         validTo:
           format: date-time
           type: string
-          example: 2025-05-08T07:40:11.453Z
+          example: 2025-05-08T09:53:29.098Z
       required:
         - code
         - description
@@ -1135,7 +1135,7 @@ components:
         validTo:
           format: date-time
           type: string
-          example: 2025-05-08T07:40:11.441Z
+          example: 2025-05-08T09:53:29.087Z
         rights:
           example: >-
             [{code:"health", description:"health descr", validFrom:"xx.yy.zzzz",
@@ -1222,7 +1222,7 @@ components:
         validTo:
           format: date-time
           type: string
-          example: 2025-05-08T07:40:11.444Z
+          example: 2025-05-08T09:53:29.090Z
         rightCodes:
           example: '["health", "finance"]'
           description: >-
@@ -1254,7 +1254,7 @@ components:
         validTo:
           format: date-time
           type: string
-          example: 2025-05-08T07:40:11.450Z
+          example: 2025-05-08T09:53:29.096Z
       required:
         - code
         - name

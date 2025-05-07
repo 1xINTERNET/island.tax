@@ -1,3 +1,5 @@
+import router from 'next/router'
+
 import {
   Accordion,
   AccordionItem,
@@ -14,14 +16,12 @@ import {
   Stack,
   Text,
 } from '@island.is/island-ui/core'
-import { Header } from '@island.is/tax/components'
 import SidebarLayout from '@island.is/tax/screens/Layouts/SidebarLayout'
 
 const Home = () => {
   return (
     <div>
       <Page>
-        <Header megaMenuData={undefined} />
         <SidebarLayout
           sidebarContent={
             <Stack space={3}>
@@ -185,6 +185,7 @@ const Home = () => {
               cta={{
                 label: 'Sækja um',
                 variant: 'primary',
+                onClick: () => router.push('tax')
               }}
               heading="Umsókn um atvinnuleysisbætur"
               headingVariant="h3"
