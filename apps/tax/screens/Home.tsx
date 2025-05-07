@@ -185,7 +185,7 @@ const Home = () => {
               cta={{
                 label: 'Sækja um',
                 variant: 'primary',
-                onClick: () => router.push('tax')
+                onClick: () => router.push('login')
               }}
               heading="Umsókn um atvinnuleysisbætur"
               headingVariant="h3"
