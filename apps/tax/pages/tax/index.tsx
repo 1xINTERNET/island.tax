@@ -4,6 +4,7 @@ import { Box, FormStepperV2, Section } from '@island.is/island-ui/core'
 import FormStepsLayout from '@island.is/tax/screens/Layouts/FormStepsLayout'
 import StepOne from '@island.is/tax/screens/Tax/steps/StepOne'
 import StepTwo from '@island.is/tax/screens/Tax/steps/StepTwo'
+import StepThree from '@island.is/tax/screens/Tax/steps/StepThree'
 
 const steps = [
   { title: 'Gagnaöflun', index: 0 },
@@ -39,7 +40,7 @@ const Tax = ({ taxInfo }) => {
       case 1:
         return <StepTwo onForward={onForward} onBackward={onBackward}></StepTwo>
       case 2:
-        return <div>Step3</div>
+        return <StepThree onForward={onForward} onBackward={onBackward}></StepThree>
       case 3:
         return <div>Step4</div>
       case 4:
