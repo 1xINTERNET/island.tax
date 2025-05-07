@@ -1,5 +1,7 @@
-import Head from 'next/head'
 import React, { FC } from 'react'
+import Head from 'next/head'
+
+import { Header } from '@island.is/tax/components'
 
 const Layout: FC<React.PropsWithChildren<unknown>> = ({ children }) => {
   return (
@@ -7,6 +9,7 @@ const Layout: FC<React.PropsWithChildren<unknown>> = ({ children }) => {
       <Head>
         <title>Ísland.is</title>
       </Head>
+      <Header megaMenuData={undefined} />
       {children}
     </div>
   )
@@ -18,18 +21,6 @@ const SupportApplication: any = ({ Component, pageProps }) => {
       <Component {...pageProps} />
     </Layout>
   )
-}
-
-SupportApplication.getInitialProps = async (appContext) => {
-  const { Component, ctx } = appContext
-  const customContext = {
-    ...ctx,
-  }
-  const pageProps = (await Component.getInitialProps(customContext)) as any
-
-  return {
-    pageProps,
-  }
 }
 
 export default SupportApplication

@@ -84,7 +84,7 @@ export const AccordionSlice: React.FC<React.PropsWithChildren<SliceProps>> = ({
                   (item.content?.[0] as Html)?.document?.content?.[0]
                     ?.content?.[0]?.value
                 }
-                cta={{
+                
                   label: item.link?.text ?? 'Default',
                   icon: 'arrowForward',
                   onClick: () => {
