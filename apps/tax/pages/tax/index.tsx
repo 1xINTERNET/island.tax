@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormStepperV2,
-  Icon,
-  Section,
-  Text,
-} from '@island.is/island-ui/core'
+import { Box, Button, Divider, FormStepperV2, Section } from '@island.is/island-ui/core'
 import FormStepsLayout from '@island.is/tax/screens/Layouts/FormStepsLayout'
+
+import StepOne from './steps/StepOne'
+import StepTwo from './steps/StepTwo'
+
+const steps = [
+  { title: 'Gagnaöflun', index: 0 },
+  { title: 'Umsækjandi', index: 1 },
+  { title: 'Tekjur', index: 2 },
+  { title: 'Eignir', index: 3 },
+  { title: 'Skuldir og vaxtagjöld', index: 4 },
+  { title: 'Yfirlit', index: 5 },
+  { title: 'Staðfesting', index: 6 },
+]
 
 export async function getServerSideProps() {
   const taxData = {
@@ -25,83 +30,62 @@ export async function getServerSideProps() {
   }
 }
 
+const renderStep = (step: number) => {
+  switch (step) {
+    case 0:
+      return <StepOne></StepOne>
+    case 1:
+      return <StepTwo></StepTwo>
+    case 2:
+      return <div>Step3</div>
+    case 3:
+      return <div>Step4</div>
+    case 4:
+      return <div>Step5</div>
+    case 5:
+      return <div>Step6</div>
+    case 6:
+      return <div>Step7</div>
+    default:
+      break
+  }
+}
+
 const Tax = ({ taxInfo }) => {
+  const [currentStep, setCurrentStep] = useState(0)
+
   return (
     <FormStepsLayout
       sidebarContent={
         <Box margin={3}>
           <FormStepperV2
-            sections={[
+            sections={steps.map((step) => (
               <Section
-                isActive
-                section={'Gagnaöflun'}
-                sectionIndex={0}
-                key={0}
-              />,
-              <Section section={'Umsækjandi'} sectionIndex={1} key={1} />,
-              <Section section={'Tekjur'} sectionIndex={2} key={2} />,
-              <Section section={'Eignir'} sectionIndex={3} key={3} />,
-              <Section
-                section={'Skuldir og vaxtagjöld'}
-                sectionIndex={4}
-                key={4}
-              />,
-              <Section section={'Yfirlit'} sectionIndex={5} key={5} />,
-              <Section section={'Staðfesting'} sectionIndex={6} key={6} />,
-            ]}
+                key={`step-${step.index}`}
+                isActive={step.index === currentStep}
+                section={step.title}
+                sectionIndex={step.index}
+              />
+            ))}
           />
         </Box>
       }
     >
-      <Box
-        background="white"
-        borderRadius="large"
-        padding={[3, 3, 10]}
-        marginY={4}
-      >
-        <Text variant="h2" as="h2">
-          Gagnaöflun
-        </Text>
-        <Box paddingY={4} display="flex" alignItems={['center']}>
-          <Icon icon="fileTrayFull" type="outline" color="blue400" />
-          <Box paddingLeft={2}>
-            <Text variant="h4" as="h4">
-              Eftirfarandi gögn verða sótt rafrænt
-            </Text>
-          </Box>
-        </Box>
-        <Text variant="h5" as="h5" color="blue400">
-          Persónupplýsingar
-        </Text>
-        <Text fontWeight="light" color="dark400" paddingBottom={4}>
-          Upplýsingar frá Þjóðskrá um nafn, kennitölu og lögheimili.
-        </Text>
-        <Text variant="h5" as="h5" color="blue400">
-          Netfang og símanúmer
-        </Text>
-        <Text fontWeight="light" color="dark400" paddingBottom={4}>
-          Upplýsingar frá Mínum síðum á Ísland.is um netfang og símanúmer.
-        </Text>
-        <Text variant="h5" as="h5" color="blue400">
-          Upplýsingar frá Skattinum
-        </Text>
-        <Text fontWeight="light" color="dark400" paddingBottom={4}>
-          Upplýsingar um ráðstöfun persónuafsláttar og greiðslur í lífeyrissjóð
-          verður sótt til Skattsins.
-        </Text>
-
-        <Box paddingBottom={10}>
-          <Checkbox
-            large
-            subLabel="Ég skil að ofangreind gögn verði sótt rafrænt."
-          />
-        </Box>
-
+      <Box>
+        {renderStep(currentStep)}
         <Box display="flex" justifyContent="spaceBetween">
-          <Button colorScheme="destructive" variant="ghost">
+          <Button
+            colorScheme="destructive"
+            variant="ghost"
+            onClick={() => {
+              if (currentStep > 0) {
+                const newStep = currentStep - 1
+                setCurrentStep(newStep)
+              }
+            }}
+          >
             Hætta við
           </Button>
-
           <Button
             colorScheme="default"
             iconType="filled"
@@ -109,6 +93,12 @@ const Tax = ({ taxInfo }) => {
             size="default"
             variant="primary"
             icon="arrowForward"
+            onClick={() => {
+              if (currentStep < 6) {
+                const newStep = currentStep + 1
+                setCurrentStep(newStep)
+              }
+            }}
           >
             Halda áfram
           </Button>
