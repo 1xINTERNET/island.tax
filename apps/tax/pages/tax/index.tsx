@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 
 import { Box, FormStepperV2, Section } from '@island.is/island-ui/core'
 import FormStepsLayout from '@island.is/tax/screens/Layouts/FormStepsLayout'
+import StepFive from '@island.is/tax/screens/Tax/steps/StepFive'
+import StepFour from '@island.is/tax/screens/Tax/steps/StepFour'
 import StepOne from '@island.is/tax/screens/Tax/steps/StepOne'
-import StepTwo from '@island.is/tax/screens/Tax/steps/StepTwo'
 import StepThree from '@island.is/tax/screens/Tax/steps/StepThree'
+import StepTwo from '@island.is/tax/screens/Tax/steps/StepTwo'
 
 const steps = [
   { title: 'Gagnaöflun', index: 0 },
@@ -42,9 +44,9 @@ const Tax = ({ taxInfo }) => {
       case 2:
         return <StepThree onForward={onForward} onBackward={onBackward}></StepThree>
       case 3:
-        return <div>Step4</div>
+        return <StepFour onForward={onForward} onBackward={onBackward}></StepFour>
       case 4:
-        return <div>Step5</div>
+        return <StepFive onForward={onForward} onBackward={onBackward}></StepFive>
       case 5:
         return <div>Step6</div>
       case 6:
