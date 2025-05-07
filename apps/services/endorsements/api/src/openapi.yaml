@@ -1054,11 +1054,11 @@ components:
         openedDate:
           format: date-time
           type: string
-          default: 2025-05-06T12:51:50.224Z
+          default: 2025-05-07T07:37:58.838Z
         closedDate:
           format: date-time
           type: string
-          default: 2025-06-06T12:51:50.224Z
+          default: 2025-06-07T07:37:58.838Z
         adminLock:
           type: boolean
           default: false
