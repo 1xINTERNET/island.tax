@@ -1,5 +1,6 @@
 import React from 'react'
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Head, Html, Main, NextScript } from 'next/document'
+
 import { defaultLanguage } from '@island.is/shared/constants'
 
 interface Props {

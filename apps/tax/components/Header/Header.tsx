@@ -3,15 +3,18 @@ import React, { FC, useContext } from 'react'
 
 import {
   Box,
+  Button,
   ButtonTypes,
   ColorSchemeContext,
   Column,
   Columns,
+  DropdownMenu,
   FocusableBox,
   GridColumn,
   GridContainer,
   GridRow,
   Hidden,
+  Input,
   Logo,
   ResponsiveSpace,
 } from '@island.is/island-ui/core'
@@ -34,9 +37,6 @@ const marginLeft = [1, 1, 1, 2] as ResponsiveSpace
 
 export const Header: FC<React.PropsWithChildren<HeaderProps>> = ({
   showSearchInHeader = true,
-  buttonColorScheme = 'default',
-  customTopLoginButtonItem,
-  loginButtonType = 'dropdown',
   children,
 }) => {
   const { colorScheme } = useContext(ColorSchemeContext)
@@ -50,10 +50,7 @@ export const Header: FC<React.PropsWithChildren<HeaderProps>> = ({
             <GridColumn span="12/12" paddingTop={4} paddingBottom={4}>
               <Columns alignY="center" space={2}>
                 <Column width="content">
-                  <FocusableBox
-                    href={'/'}
-                    data-testid="link-back-home"
-                  >
+                  <FocusableBox href={'/'} data-testid="link-back-home">
                     <Hidden above="md">
                       <Logo
                         id="header-logo-icon"
@@ -79,22 +76,31 @@ export const Header: FC<React.PropsWithChildren<HeaderProps>> = ({
                         role="search"
                         display={['none', 'none', 'none', 'block']}
                       >
-                        SearchInput
+                        <Input
+                          name={'search'}
+                          placeholder="Leitaðu á Ísland.is"
+                          icon={{
+                            name: 'search',
+                          }}
+                          backgroundColor="blue"
+                        ></Input>
                       </Box>
                     )}
 
                     <Box marginLeft={marginLeft}>
-                      Login Button
-                    </Box>
-
-                    <Box
-                      marginLeft={marginLeft}
-                      display={['none', 'none', 'none', 'block']}
-                    >
-                      LanguageToggler
+                      <Button variant="utility" icon="person">
+                        Mínar síður
+                      </Button>
                     </Box>
                     <Box marginLeft={marginLeft}>
-                      Menu
+                      <DropdownMenu
+                        title="Valmynd"
+                        items={[
+                          { title: 'ItemMenu1', href: '#' },
+                          { title: 'ItemMenu2', href: '#' },
+                        ]}
+                        icon='menu'
+                      ></DropdownMenu>
                     </Box>
                   </Box>
                 </Column>

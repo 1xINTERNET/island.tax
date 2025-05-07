@@ -1,9 +1,20 @@
-// Required ES6 syntax for TypeScript isolatedModules.
-export * from './real'
+/**
+ * Add any shared web components here. This module can be imported like this:
+ *
+ * import { ... } from '@island.is/web/components'
+ *
+ * Never import it like this:
+ *
+ * import { ... } from '../components/real'
+ *
+ * This is so production builds can better optimize chunks. Read
+ * `libs/shared/babel/README.md` for more details.
+ */
 
-// This module should never be imported for performance reasons. Instead
-// import components from `@island.is/tax/components`. Read
-// `libs/shared/babel/README.md` for more details.
-throw new Error(
-  'Do not import tax components from components/index.ts. Use `@island.is/tax/components` instead.',
-)
+export * from './Header/Header'
+export * from './SkipToMainContent/SkipToMainContent'
+export * from './PageLoader/PageLoader'
+export * from './FixedNav/FixedNav'
+export * from './Main/Main'
+export * from './MobileAppBanner/MobileAppBanner'
+export * from './Header/Header'
