@@ -1,3 +1,5 @@
+import { Controller, useForm } from 'react-hook-form'
+
 import {
   Box,
   Button,
@@ -8,6 +10,7 @@ import {
   Input,
   Text,
 } from '@island.is/island-ui/core'
+import { InputController } from '@island.is/shared/form-fields'
 
 import Buttons from '../Buttons'
 
@@ -16,7 +19,19 @@ type StepThreeProps = {
   onBackward: () => void
 }
 
+interface InputState {
+  employerName: string
+  salary: number
+}
+
 const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
+  const { control, handleSubmit, formState } = useForm<InputState>()
+
+  const onSubmit = (inputState: InputState) => {
+    onForward()
+    console.log(inputState)
+  }
+
   return (
     <Box
       background="white"
@@ -27,63 +42,56 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
       <Text variant="h2" paddingBottom={4}>
         Launatekjur og starfstengdar greiðslur
       </Text>
-
       <GridContainer>
         <GridRow>
           <GridColumn span={['12/12', '12/12', '7/12']} paddingBottom={[3]}>
-            <Text fontWeight="semiBold" paddingBottom={2}>Nafn launagreiðanda</Text>
-            <Input
+            <Text fontWeight="semiBold" paddingBottom={2}>
+              Nafn launagreiðanda
+            </Text>
+            <InputController
+              id="employerName"
+              control={control}
               backgroundColor="blue"
-              maxLength={4}
-              name="Input"
+              maxLength={20}
+              required={true}
+              name="employerName"
               placeholder="Norðurljós Software ehf"
               rows={0}
               size="xs"
               type="text"
+              error={formState.errors['employerName']?.message}
+              rules={{
+                required: {
+                  value: true,
+                  message: 'Áskilið reitur',
+                },
+              }}
             />
           </GridColumn>
 
           <GridColumn span={['12/12', '12/12', '5/12']}>
-            <Text fontWeight="semiBold" paddingBottom={2}>Laun</Text>
+            <Text fontWeight="semiBold" paddingBottom={2}>
+              Laun
+            </Text>
             <Box display="flex" alignItems="center">
-              <Input
+              <InputController
+                id="salary"
+                control={control}
                 backgroundColor="blue"
                 maxLength={4}
-                name="Input"
+                required={true}
+                name="salary"
                 placeholder="9.360.000 kr."
                 rows={0}
                 size="xs"
                 type="number"
-              />
-              <Box paddingLeft={2}>
-                <Button circle icon="remove" variant="ghost" size="small" />
-              </Box>
-            </Box>
-          </GridColumn>
-        </GridRow>
-        <GridRow>
-          <GridColumn span={['12/12', '12/12', '7/12']} paddingBottom={[3]}>
-            <Input
-              backgroundColor="blue"
-              maxLength={4}
-              name="Input"
-              placeholder="Norðurljós Software ehf"
-              rows={0}
-              size="xs"
-              type="text"
-            />
-          </GridColumn>
-
-          <GridColumn span={['12/12', '12/12', '5/12']}>
-            <Box display="flex" alignItems="center">
-              <Input
-                backgroundColor="blue"
-                maxLength={4}
-                name="Input"
-                placeholder="9.360.000 kr."
-                rows={0}
-                size="xs"
-                type="number"
+                error={formState.errors['salary']?.message}
+                rules={{
+                  required: {
+                    value: true,
+                    message: 'Áskilið reitur',
+                  },
+                }}
               />
               <Box paddingLeft={2}>
                 <Button circle icon="remove" variant="ghost" size="small" />
@@ -122,7 +130,7 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
           </GridColumn>
         </GridRow>
       </GridContainer>
-      <Buttons onBackward={onBackward} onForward={onForward}></Buttons>
+      <Buttons onBackward={onBackward} onForward={handleSubmit(onSubmit)}></Buttons>
     </Box>
   )
 }
