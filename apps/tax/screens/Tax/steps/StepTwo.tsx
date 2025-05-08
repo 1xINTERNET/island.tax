@@ -1,3 +1,5 @@
+import { useQuery} from '@apollo/client'
+
 import {
   AlertMessage,
   Box,
@@ -10,6 +12,9 @@ import {
 } from '@island.is/island-ui/core'
 import { fieldWrapper } from '@island.is/tax/screens/Tax/steps/StepTwo.css'
 
+import {GetUserQuery} from '../../../graphql/schema'
+import { withApollo } from "../../../graphql/withApollo";
+import { GET_USER_QUERY } from "../../queries";
 import Buttons from '../Buttons'
 
 type StepTwoProps = {
@@ -18,6 +23,13 @@ type StepTwoProps = {
 }
 
 const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
+  const { data } = useQuery<GetUserQuery>(GET_USER_QUERY, {
+    variables: {
+      // Getting user id from local storage demo purpose
+      id: Number(localStorage.getItem('session_token')),
+    },
+  });
+
   return (
     <Box
       background="white"
@@ -40,9 +52,10 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
               backgroundColor="white"
               label="Fullt nafn"
               name=""
-              placeholder="Jökull Þórðarson"
+              value={data?.user.firstName + ' ' + data?.user.lastName}
               size="sm"
               type="text"
+              disabled={true}
             />
           </GridColumn>
         </GridRow>
@@ -53,9 +66,10 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
               backgroundColor="white"
               label="Kennitala"
               name=""
-              placeholder="120389-4569"
+              value={data?.user.ssn}
               size="sm"
-              type="number"
+              type="text"
+              disabled={true}
             />
           </GridColumn>
 
@@ -64,9 +78,10 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
               backgroundColor="white"
               label="Heimili"
               name=""
-              placeholder="Bláfjallagata 12"
+              value={data?.user.streetAndHouseNumber ?? ""}
               size="sm"
               type="text"
+              disabled={true}
             />
           </GridColumn>
         </GridRow>
@@ -76,9 +91,10 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
               backgroundColor="white"
               label="Póstnúmer"
               name=""
-              placeholder="105"
+              value={data?.user.postalCode ?? 0}
               size="sm"
               type="number"
+              disabled={true}
             />
           </GridColumn>
 
@@ -87,9 +103,10 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
               backgroundColor="white"
               label="Sveitarfélag"
               name=""
-              placeholder="Reykjavík"
+              value={data?.user.city ?? ""}
               size="sm"
               type="text"
+              disabled={true}
             />
           </GridColumn>
         </GridRow>
@@ -99,9 +116,11 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
               backgroundColor="white"
               label="Netfang "
               name=""
-              placeholder="jokull.thordarson@email.is"
+              value={data?.user.email ?? ""}
               size="sm"
               type="email"
+              autoComplete="off"
+              disabled={true}
             />
           </GridColumn>
 
@@ -110,9 +129,10 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
               backgroundColor="white"
               label="Símanúmer"
               name=""
-              placeholder="+354 772-8391"
+              value={data?.user.phone ?? ""}
               size="sm"
               type="tel"
+              disabled={true}
             />
           </GridColumn>
         </GridRow>
@@ -129,4 +149,4 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
   )
 }
 
-export default StepTwo
+export default withApollo(StepTwo);

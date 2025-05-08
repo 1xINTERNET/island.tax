@@ -1,4 +1,6 @@
-import { Controller, useForm } from 'react-hook-form'
+import { useEffect, useMemo } from 'react'
+import { useForm } from 'react-hook-form'
+import { useQuery, useMutation } from '@apollo/client'
 
 import {
   Box,
@@ -12,6 +14,9 @@ import {
 } from '@island.is/island-ui/core'
 import { InputController } from '@island.is/shared/form-fields'
 
+import {GetUserQuery} from '../../../graphql/schema'
+import { withApollo } from "../../../graphql/withApollo";
+import { CREATE_INCOME_MUTATION, GET_USER_QUERY, UPDATE_INCOME_MUTATION } from '../../queries'
 import Buttons from '../Buttons'
 
 type StepThreeProps = {
@@ -24,12 +29,42 @@ interface InputState {
   salary: number
 }
 
-const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
-  const { control, handleSubmit, formState } = useForm<InputState>()
+const formatter = new Intl.NumberFormat('is-IS', {
+  style: 'decimal',
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0
+});
 
-  const onSubmit = (inputState: InputState) => {
-    onForward()
-    console.log(inputState)
+const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
+  const { control, handleSubmit, formState, setValue, watch } = useForm<InputState>();
+  const [createIncome] = useMutation(CREATE_INCOME_MUTATION);
+  const [updateIncome] = useMutation(UPDATE_INCOME_MUTATION);
+  const { data } = useQuery<GetUserQuery>(GET_USER_QUERY, {
+    variables: {
+      // Getting user id from local storage demo purpose
+      id: Number(localStorage.getItem('session_token')),
+    },
+  });
+
+  const assetData = useMemo(() => data?.user.taxReturns?.[0]?.incomes?.[0], [data?.user.taxReturns]);
+
+  useEffect(() => {
+    if (assetData) {
+      setValue('employerName', assetData.source)
+      setValue('salary', assetData.amount)
+    }
+  }, [assetData, data?.user.taxReturns, setValue]);
+
+  const salary = watch('salary');
+
+  const onSubmit = async (inputState: InputState) => {
+    if (assetData) {
+      await updateIncome({ variables: { income: {id: Number(assetData.id), source: inputState.employerName, amount: Number(inputState.salary), type: 'salary' }}});
+      onForward();
+    } else {
+      await createIncome({ variables: { income: {taxReturnId: data?.user.taxReturns?.[0].id, source: inputState.employerName, amount: Number(inputState.salary), type: 'salary' }}});
+      onForward();
+    }
   }
 
   return (
@@ -52,7 +87,7 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
               id="employerName"
               control={control}
               backgroundColor="blue"
-              maxLength={20}
+              maxLength={200}
               required={true}
               name="employerName"
               placeholder="Norðurljós Software ehf"
@@ -122,7 +157,7 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
               backgroundColor="white"
               maxLength={4}
               name="Input"
-              placeholder="10.260.000 kr."
+              placeholder={formatter.format(salary ?? 0) + ' kr.'}
               rows={0}
               size="xs"
               type="number"
@@ -135,4 +170,4 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
   )
 }
 
-export default StepThree
+export default withApollo(StepThree)
