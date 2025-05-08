@@ -3,9 +3,11 @@ import { useForm } from 'react-hook-form'
 import {
   Box,
   Button,
+  Divider,
   GridColumn,
   GridContainer,
   GridRow,
+  Input,
   Text,
 } from '@island.is/island-ui/core'
 import { InputController } from '@island.is/shared/form-fields'
@@ -128,6 +130,34 @@ const StepFour = ({ onForward, onBackward }: StepFourProps) => {
                 <Button circle icon="remove" variant="ghost" size="small" />
               </Box>
             </Box>
+          </GridColumn>
+        </GridRow>
+      </GridContainer>
+      <Button
+        colorScheme="default"
+        iconType="filled"
+        icon="add"
+        preTextIconType="filled"
+        size="default"
+        variant="text"
+      >
+        Bæta við línu
+      </Button>
+      <Box paddingY={4}>
+        <Divider />
+      </Box>
+      <GridContainer>
+        <GridRow>
+          <GridColumn span="5/12" offset="7/12">
+            <Input
+              backgroundColor="white"
+              maxLength={4}
+              name="Input"
+              placeholder="10.260.000 kr."
+              rows={0}
+              size="xs"
+              type="number"
+            />
           </GridColumn>
         </GridRow>
       </GridContainer>

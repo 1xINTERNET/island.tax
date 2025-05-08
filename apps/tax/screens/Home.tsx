@@ -6,8 +6,6 @@ import {
   ActionCard,
   Box,
   Breadcrumbs,
-  Bullet,
-  BulletList,
   Button,
   Footer,
   Link,
@@ -39,125 +37,69 @@ const Home = () => {
                 </Button>
               </Link>
               <Navigation
-                activeItemTitle="Hér er virk undirsíða"
-                items={[
-                  {
-                    accordion: true,
-                    href: '#',
-                    items: [
-                      {
-                        href: '#',
-                        title: 'Fjölskylda og velferð',
-                      },
-                      {
-                        active: true,
-                        href: '#',
-                        title: 'Eldri borgarar',
-                      },
-                      {
-                        href: '#',
-                        title: 'Bætur',
-                      },
-                      {
-                        href: '#',
-                        title: 'Málefni fatlaðra',
-                      },
-                      {
-                        href: '#',
-                        title: 'Menntun',
-                      },
-                      {
-                        href: '#',
-                        title: 'Vegabréf, ferðalög og búseta erlendis',
-                      },
-                      {
-                        href: '#',
-                        title: 'Innflytjendur',
-                      },
-                      {
-                        href: '#',
-                        title: 'Umhverfismál',
-                      },
-                      {
-                        href: '#',
-                        title: 'Húsnæðismál',
-                      },
-                      {
-                        href: '#',
-                        title: 'Samfélag og réttindi',
-                      },
-                      {
-                        href: '#',
-                        title: 'Dómstólar og réttarfar',
-                      },
-                      {
-                        href: '#',
-                        title: 'Fjármál og skattar',
-                      },
-                    ],
-                    title: 'Tengill sem opnast með takka',
-                  },
-                ]}
-                title="Titill á yfirsíðu"
-                baseId={''}
-              />
-              <Navigation
-                activeItemTitle="Eldri borgarar"
-                colorScheme="purple"
+                activeItemTitle="Framtal og álagning"
                 items={[
                   {
                     href: '#',
-                    title: 'Fjölskylda og velferð',
+                    title: 'Almennt',
                   },
                   {
                     active: true,
                     href: '#',
-                    title: 'Eldri borgarar',
+                    title: 'Framtal og álagning',
                   },
                   {
                     href: '#',
-                    title: 'Bætur',
+                    title: 'Skattar og gjöld',
                   },
                   {
                     href: '#',
-                    title: 'Málefni fatlaðra',
+                    title: 'Tekjur og gjöld',
                   },
                   {
                     href: '#',
-                    title: 'Menntun',
+                    title: 'Fjármagnstekjjur',
                   },
                   {
                     href: '#',
-                    title: 'Vegabréf, ferðalög og búseta erlendis',
+                    title: 'Staðgreiðsla',
                   },
                   {
                     href: '#',
-                    title: 'Innflytjendur',
+                    title: 'Reiknivélar',
                   },
                   {
                     href: '#',
-                    title: 'Umhverfismál',
-                  },
-                  {
-                    href: '#',
-                    title: 'Húsnæðismál',
-                  },
-                  {
-                    href: '#',
-                    title: 'Samfélag og réttindi',
-                  },
-                  {
-                    href: '#',
-                    title: 'Dómstólar og réttarfar',
-                  },
-                  {
-                    href: '#',
-                    title: 'Fjármál og skattar',
+                    title: 'Innheimta',
                   },
                 ]}
-                title="Titill á yfirflokk"
+                title="Efnisyfirlit"
                 baseId={''}
               />
+              <Navigation
+                colorScheme="purple"
+                items={[
+                  {
+                    href: '#',
+                    title: 'Lagasafn Skattsins',
+                  },
+                  {
+                    href: '#',
+                    title: 'Barnabætur',
+                  },
+                  {
+                    href: '#',
+                    title: 'Leigutekjur',
+                  },
+                  {
+                    href: '#',
+                    title: 'Rafræn skilríki',
+                  },
+                ]}
+                title="Tengt efni"
+                baseId={''}
+              />
+
             </Stack>
           }
         >
@@ -169,14 +111,19 @@ const Home = () => {
                 href: '/',
               },
               {
-                title: 'Fjölskyldumál',
+                title: 'Skatturinn',
+                typename: '',
+                href: '/',
+              },
+              {
+                title: 'Framtal og álagning',
                 typename: '',
                 href: '/',
               },
             ]}
           ></Breadcrumbs>
-          <Text as="h1" variant="h1" paddingY={2}>
-            Skil á framtali
+          <Text as="h1" variant="h1" paddingTop={4}>
+            Framtal og álagning
           </Text>
 
           <Box marginY={6}>
@@ -187,7 +134,7 @@ const Home = () => {
                 variant: 'primary',
                 onClick: () => router.push('login')
               }}
-              heading="Umsókn um atvinnuleysisbætur"
+              heading="Skila skattframtali rafrænt"
               headingVariant="h3"
             />
           </Box>
@@ -196,27 +143,24 @@ const Home = () => {
             Almennar upplýsingar
           </Text>
           <Text paddingBottom={2}>
-            Foreldrar geta átt rétt á fæðingarorlofi þegar barn þeirra fæðist,
-            er frumættleitt eða tekið í varanlegt fóstur. Hvort foreldri á rétt
-            á 6 mánuðum í fæðingarorlof og heildarréttur tveggja foreldra er því
-            12 mánuðir. Skilyrði er að hafa unnið á Íslandi samfellt síðustu 6
-            mánuðina fyrir fæðingardag barns, í að minnsta kosti 25%
-            starfshlutfalli í hverjum mánuði.
+          Hægt er að skila skattframtali, ásamt öllum fylgiskjölum, á vefnum. Gildir það bæði um
+          launamenn og einstaklinga með eigin atvinnurekstur.
+          Afrit af skattframtali er að jafnaði tilbúið á þjónustusíðu tveimur dögum eftir skil.
           </Text>
 
-          <Box marginY={6}>
-            <Text as="h2" variant="h2" paddingBottom={2}>
-            Að sækja um
+          <Box marginY={4}>
+            <Text as="h3" variant="h3" paddingBottom={6}>
+              Spurt og svarað um Framtal og álagningu
             </Text>
             <Accordion singleExpand>
-              <AccordionItem id="id_1" label="Hvenær þarf að skila umsókn?">
+              <AccordionItem id="id_1" label="Skilafrestur">
                 <Text>
-                  Er hægt að leggja inn greiðslur á bankareikning maka?
+                  Skilafrestur skattframtals 2025 vegna tekjuársins 2024 er til <strong>föstudagsins 14. mars 2025</strong>
                 </Text>
               </AccordionItem>
               <AccordionItem
                 id="id_2"
-                label="Er hægt að leggja inn greiðslur á bankareikning maka?"
+                label="Álagningarseðill og forsendur"
               >
                 <Text>
                   Hægt er að senda umsóknir og önnur gögn með pósti, tölvupósti
@@ -226,7 +170,27 @@ const Home = () => {
               </AccordionItem>
               <AccordionItem
                 id="id_3"
-                label="Hvernig kem ég umsókninni til ykkar?"
+                label="Framtalsleiðbeiningar"
+              >
+                <Text>
+                  Hægt er að senda umsóknir og önnur gögn með pósti, tölvupósti
+                  eða faxi. Læknisvottorð verða að berast með pósti þar sem við
+                  þurfum frumritið.
+                </Text>
+              </AccordionItem>
+              <AccordionItem
+                id="id_4"
+                label="Að lesa út úr álagningunni"
+              >
+                <Text>
+                  Hægt er að senda umsóknir og önnur gögn með pósti, tölvupósti
+                  eða faxi. Læknisvottorð verða að berast með pósti þar sem við
+                  þurfum frumritið.
+                </Text>
+              </AccordionItem>
+              <AccordionItem
+                id="id_5"
+                label="Rafræn skilríki og veflyklar"
               >
                 <Text>
                   Hægt er að senda umsóknir og önnur gögn með pósti, tölvupósti
@@ -237,50 +201,17 @@ const Home = () => {
             </Accordion>
           </Box>
 
-          <Box marginTop={6}>
-            <Text as="h3" variant="h3" paddingBottom={2}>
-              Fyrirsögn H3
-            </Text>
-            <BulletList type="ul">
-              <Bullet>
-                First bullet Réttur til fæðingarorlofs vegna fæðingar fellur
-                niður er barnið 24 mánaða aldri.
-              </Bullet>
-              <Bullet>
-                Réttur til fæðingarorlofs vegna ættleiðingar eða varanlegs
-                fóstur fellur niður 24 mánuðum eftir að barnið kom inn á
-                heimilið.
-              </Bullet>
-              <Bullet>
-                {' '}
-                Réttur foreldris til fæðingarorlofs er bundinn því að það fari
-                sjálft með forsjá barnsins eða hafi sameiginlega forsjá ásamt
-                hinu foreldri þess þegar taka fæðingarorlofs hefst.
-              </Bullet>
-            </BulletList>
-          </Box>
-
-          <Box marginTop={6}>
-            <Text as="h3" variant="h3" paddingBottom={2}>
-              Fyrirsögn H4
-            </Text>
-            <BulletList type="ol">
-              <Bullet>
-                First bullet Réttur til fæðingarorlofs vegna fæðingar fellur
-                niður er barnið 24 mánaða aldri.
-              </Bullet>
-              <Bullet>
-                Réttur til fæðingarorlofs vegna ættleiðingar eða varanlegs
-                fóstur fellur niður 24 mánuðum eftir að barnið kom inn á
-                heimilið.
-              </Bullet>
-              <Bullet>
-                {' '}
-                Réttur foreldris til fæðingarorlofs er bundinn því að það fari
-                sjálft með forsjá barnsins eða hafi sameiginlega forsjá ásamt
-                hinu foreldri þess þegar taka fæðingarorlofs hefst.
-              </Bullet>
-            </BulletList>
+          <Box marginTop={6} display="flex" justifyContent="flexEnd">
+            <Button
+              colorScheme="default"
+              icon="add"
+              iconType="filled"
+              preTextIconType="filled"
+              size="small"
+              variant="utility"
+            >
+              Opna allt
+            </Button>
           </Box>
         </SidebarLayout>
         <Footer />

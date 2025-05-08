@@ -113,7 +113,7 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
         Bæta við línu
       </Button>
 
-      <Box paddingY={2}>
+      <Box paddingY={4}>
         <Divider />
       </Box>
       <GridContainer>
