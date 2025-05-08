@@ -78,6 +78,7 @@ export const Header: FC<React.PropsWithChildren<HeaderProps>> = ({
                       >
                         <Input
                           name={'search'}
+                          size="sm"
                           placeholder="Leitaðu á Ísland.is"
                           icon={{
                             name: 'search',

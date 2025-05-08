@@ -5,7 +5,6 @@ import {
   GridContainer,
   GridRow,
   Input,
-  Text,
   Typography,
 } from '@island.is/island-ui/core'
 import { fieldWrapper } from '@island.is/tax/screens/Tax/steps/StepTwo.css'
@@ -25,22 +24,19 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
       padding={[3, 3, 10]}
       marginY={4}
     >
-      <Typography variant="h1" paddingBottom={1}>
-        Skil á framtali
+      <Typography variant="h2" paddingBottom={1}>
+        Umsækjandi
       </Typography>
-
-      <Text fontWeight="light">
-        Vinsamlegast leiðréttið eftirfarandi upplýsingar ef þörf er á
-      </Text>
 
       <GridContainer className={fieldWrapper}>
         <GridRow>
           <GridColumn span="12/12" className={fieldWrapper}>
             <Input
+              disabled
               backgroundColor="white"
               label="Fullt nafn"
               name=""
-              placeholder="Jökull Þórðarson"
+              value="Jökull Þórðarson"
               size="sm"
               type="text"
             />
@@ -50,33 +46,11 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
         <GridRow>
           <GridColumn span={['12/12', '12/12', '6/12']} className={fieldWrapper}>
             <Input
-              backgroundColor="white"
-              label="Kennitala"
-              name=""
-              placeholder="120389-4569"
-              size="sm"
-              type="number"
-            />
-          </GridColumn>
-
-          <GridColumn span={['12/12', '12/12', '6/12']} className={fieldWrapper}>
-            <Input
-              backgroundColor="white"
-              label="Heimili"
-              name=""
-              placeholder="Bláfjallagata 12"
-              size="sm"
-              type="text"
-            />
-          </GridColumn>
-        </GridRow>
-        <GridRow>
-          <GridColumn span={['12/12', '12/12', '6/12']} className={fieldWrapper}>
-            <Input
+              disabled
               backgroundColor="white"
               label="Póstnúmer"
               name=""
-              placeholder="105"
+              value="1203894569"
               size="sm"
               type="number"
             />
@@ -84,10 +58,11 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
 
           <GridColumn span={['12/12', '12/12', '6/12']} className={fieldWrapper}>
             <Input
+              disabled
               backgroundColor="white"
-              label="Sveitarfélag"
+              label="Heimili"
               name=""
-              placeholder="Reykjavík"
+              value="Bláfjallagata 12"
               size="sm"
               type="text"
             />
@@ -96,10 +71,36 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
         <GridRow>
           <GridColumn span={['12/12', '12/12', '6/12']} className={fieldWrapper}>
             <Input
+              disabled
+              backgroundColor="white"
+              label="Póstnúmer"
+              name=""
+              value="105"
+              size="sm"
+              type="number"
+            />
+          </GridColumn>
+
+          <GridColumn span={['12/12', '12/12', '6/12']} className={fieldWrapper}>
+            <Input
+              disabled
+              backgroundColor="white"
+              label="Sveitarfélag"
+              name=""
+              value="Reykjavík"
+              size="sm"
+              type="text"
+            />
+          </GridColumn>
+        </GridRow>
+        <GridRow>
+          <GridColumn span={['12/12', '12/12', '6/12']} className={fieldWrapper}>
+            <Input
+              disabled
               backgroundColor="white"
               label="Netfang "
               name=""
-              placeholder="jokull.thordarson@email.is"
+              value="jokull.thordarson@email.is"
               size="sm"
               type="email"
             />
@@ -107,10 +108,11 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
 
           <GridColumn span={['12/12', '12/12', '6/12']} className={fieldWrapper}>
             <Input
+              disabled
               backgroundColor="white"
               label="Símanúmer"
               name=""
-              placeholder="+354 772-8391"
+              value="+354 772-8391"
               size="sm"
               type="tel"
             />
