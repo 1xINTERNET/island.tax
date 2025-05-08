@@ -46,15 +46,17 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
           <GridColumn span={['12/12', '12/12', '5/12']}>
             <Text fontWeight="semiBold" paddingBottom={2}>Laun</Text>
             <Box display="flex" alignItems="center">
-              <Input
-                backgroundColor="blue"
-                maxLength={4}
-                name="Input"
-                placeholder="9.360.000 kr."
-                rows={0}
-                size="xs"
-                type="number"
-              />
+              <Box width='full' paddingBottom={2}>
+                <Input
+                  backgroundColor="blue"
+                  maxLength={4}
+                  name="Input"
+                  placeholder="9.360.000 kr."
+                  rows={0}
+                  size="xs"
+                  type="number"
+                />
+              </Box>
               <Box paddingLeft={2}>
                 <Button circle icon="remove" variant="ghost" size="small" />
               </Box>
@@ -76,15 +78,17 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
 
           <GridColumn span={['12/12', '12/12', '5/12']}>
             <Box display="flex" alignItems="center">
-              <Input
-                backgroundColor="blue"
-                maxLength={4}
-                name="Input"
-                placeholder="9.360.000 kr."
-                rows={0}
-                size="xs"
-                type="number"
-              />
+              <Box width='full'>
+                <Input
+                  backgroundColor="blue"
+                  maxLength={4}
+                  name="Input"
+                  placeholder="9.360.000 kr."
+                  rows={0}
+                  size="xs"
+                  type="number"
+                />
+              </Box>
               <Box paddingLeft={2}>
                 <Button circle icon="remove" variant="ghost" size="small" />
               </Box>
@@ -92,17 +96,18 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
           </GridColumn>
         </GridRow>
       </GridContainer>
-
-      <Button
-        colorScheme="default"
-        iconType="filled"
-        icon="add"
-        preTextIconType="filled"
-        size="default"
-        variant="text"
-      >
-        Bæta við línu
-      </Button>
+      <Box paddingY={1}>
+        <Button
+          colorScheme="default"
+          iconType="filled"
+          icon="add"
+          preTextIconType="filled"
+          size="default"
+          variant="text"
+        >
+          Bæta við línu
+        </Button>
+      </Box>
 
       <Box paddingY={2}>
         <Divider />
