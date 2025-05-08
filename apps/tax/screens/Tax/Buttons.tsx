@@ -2,12 +2,13 @@ import { Box, Button } from '@island.is/island-ui/core'
 
 type ButtonProps = {
   onForward: () => void
-  onBackward: () => void
+  onBackward: () => void,
+  isLastStep?: boolean,
 }
 
-const Buttons = ({ onForward, onBackward }: ButtonProps) => {
+const Buttons = ({ onForward, onBackward, isLastStep }: ButtonProps) => {
   return (
-    <Box display="flex" justifyContent="spaceBetween" marginTop={6}>
+    <Box display="flex" justifyContent="spaceBetween" marginTop={10}>
       <Button
         colorScheme="destructive"
         variant="ghost"
@@ -24,7 +25,7 @@ const Buttons = ({ onForward, onBackward }: ButtonProps) => {
         icon="arrowForward"
         onClick={() => onForward()}
       >
-        Halda áfram
+        {isLastStep ? 'Senda inn' : 'Halda áfram'}
       </Button>
     </Box>
   )

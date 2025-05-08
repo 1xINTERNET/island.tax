@@ -1,12 +1,15 @@
+import { useForm } from 'react-hook-form'
+
 import {
   Box,
   Button,
   GridColumn,
   GridContainer,
   GridRow,
-  Input,
   Text,
 } from '@island.is/island-ui/core'
+import { InputController } from '@island.is/shared/form-fields'
+import { REQUIRED_ERROR_MESSAGE } from '@island.is/tax/constants'
 
 import Buttons from '../Buttons'
 
@@ -15,7 +18,20 @@ type StepFourProps = {
   onBackward: () => void
 }
 
+interface InputState {
+  assetNumber: string
+  propertyLocation: string
+  propertyValue: string
+}
+
 const StepFour = ({ onForward, onBackward }: StepFourProps) => {
+  const { control, handleSubmit, formState } = useForm<InputState>()
+
+  const onSubmit = (inputState: InputState) => {
+    onForward()
+    console.log(inputState)
+  }
+
   return (
     <Box
       background="white"
@@ -44,39 +60,69 @@ const StepFour = ({ onForward, onBackward }: StepFourProps) => {
 
         <GridRow>
           <GridColumn span={['12/12', '12/12', '4/12']} paddingBottom={[3]}>
-            <Input
+            <InputController
+              id="assetNumber"
               backgroundColor="blue"
-              maxLength={4}
-              name="Input"
+              maxLength={20}
+              control={control}
+              required={true}
+              name="assetNumber"
               placeholder="Norðurljós Software ehf"
               rows={0}
               size="xs"
               type="text"
+              error={formState.errors['assetNumber']?.message}
+              rules={{
+                required: {
+                  value: true,
+                  message: REQUIRED_ERROR_MESSAGE,
+                },
+              }}
             />
           </GridColumn>
 
           <GridColumn span={['12/12', '12/12', '4/12']} paddingBottom={[3]}>
-            <Input
+            <InputController
+              id="propertyLocation"
               backgroundColor="blue"
-              maxLength={4}
-              name="Input"
+              maxLength={20}
+              control={control}
+              required={true}
+              name="propertyLocation"
               placeholder="Norðurljós Software ehf"
               rows={0}
               size="xs"
               type="text"
+              error={formState.errors['assetNumber']?.message}
+              rules={{
+                required: {
+                  value: true,
+                  message: REQUIRED_ERROR_MESSAGE,
+                },
+              }}
             />
           </GridColumn>
 
           <GridColumn span={['12/12', '12/12', '4/12']}>
             <Box display="flex" alignItems="center">
-              <Input
+              <InputController
+                id="propertyValue"
+                control={control}
+                required={true}
                 backgroundColor="blue"
-                maxLength={4}
-                name="Input"
+                maxLength={20}
+                name="propertyValue"
                 placeholder="9.360.000 kr."
                 rows={0}
                 size="xs"
                 type="number"
+                error={formState.errors['assetNumber']?.message}
+                rules={{
+                  required: {
+                    value: true,
+                    message: REQUIRED_ERROR_MESSAGE,
+                  },
+                }}
               />
               <Box paddingLeft={2}>
                 <Button circle icon="remove" variant="ghost" size="small" />
@@ -85,7 +131,10 @@ const StepFour = ({ onForward, onBackward }: StepFourProps) => {
           </GridColumn>
         </GridRow>
       </GridContainer>
-      <Buttons onBackward={onBackward} onForward={onForward}></Buttons>
+      <Buttons
+        onBackward={onBackward}
+        onForward={handleSubmit(onSubmit)}
+      ></Buttons>
     </Box>
   )
 }

@@ -540,13 +540,13 @@ const StepSix = ({ onForward, onBackward }: StepSixProps) => {
         </Box>
       </GridContainer>
 
-      <Box paddingBottom={10}>
+      <Box>
         <Checkbox
           large
           subLabel="Hér með staðfestist að viðlögðum drengskap að skýrsla þessi um tekjur og eignir er gefin eftir bestu vitund. Áritaðar fjárhæðir hafa verið yfirfarnar og jafnframt leiðréttar, hafi það reynst nauðsynlegt. Mér er kunnugt um að ófullnægjandi eða röng upplýsingagjöf getur haft í för með sér álagsbeitingu eða refsingu."
         />
       </Box>
-      <Buttons onBackward={onBackward} onForward={onForward}></Buttons>
+      <Buttons onBackward={onBackward} onForward={onForward} isLastStep></Buttons>
     </Box>
   )
 }

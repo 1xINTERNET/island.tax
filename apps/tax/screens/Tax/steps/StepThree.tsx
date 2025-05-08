@@ -1,4 +1,4 @@
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import {
   Box,
@@ -11,6 +11,7 @@ import {
   Text,
 } from '@island.is/island-ui/core'
 import { InputController } from '@island.is/shared/form-fields'
+import { REQUIRED_ERROR_MESSAGE } from '@island.is/tax/constants'
 
 import Buttons from '../Buttons'
 
@@ -63,7 +64,7 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
               rules={{
                 required: {
                   value: true,
-                  message: 'Áskilið reitur',
+                  message: REQUIRED_ERROR_MESSAGE,
                 },
               }}
             />
@@ -78,7 +79,7 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
                 id="salary"
                 control={control}
                 backgroundColor="blue"
-                maxLength={4}
+                maxLength={20}
                 required={true}
                 name="salary"
                 placeholder="9.360.000 kr."
@@ -89,7 +90,7 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
                 rules={{
                   required: {
                     value: true,
-                    message: 'Áskilið reitur',
+                    message: REQUIRED_ERROR_MESSAGE,
                   },
                 }}
               />
