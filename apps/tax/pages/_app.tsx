@@ -1,12 +1,11 @@
 import React, { FC } from 'react'
-
-import { fontStyles } from '../styles/font.css';
-
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { Header } from '@island.is/tax/components'
 import {PRELOADED_FONTS} from "@island.is/tax/constants";
+
+import { fontStyles } from '../styles/font.css';
 
 const Layout: FC<React.PropsWithChildren<unknown>> = ({ children }) => {
   const router = useRouter()
