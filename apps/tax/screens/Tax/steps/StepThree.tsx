@@ -47,20 +47,20 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
     },
   });
 
-  const assetData = useMemo(() => data?.user.taxReturns?.[0]?.incomes?.[0], [data?.user.taxReturns]);
+  const incomeData = useMemo(() => data?.user.taxReturns?.[0]?.incomes?.[0], [data?.user.taxReturns]);
 
   useEffect(() => {
-    if (assetData) {
-      setValue('employerName', assetData.source)
-      setValue('salary', assetData.amount)
+    if (incomeData) {
+      setValue('employerName', incomeData.source)
+      setValue('salary', incomeData.amount)
     }
-  }, [assetData, data?.user.taxReturns, setValue]);
+  }, [incomeData, data?.user.taxReturns, setValue]);
 
   const salary = watch('salary');
 
   const onSubmit = async (inputState: InputState) => {
-    if (assetData) {
-      await updateIncome({ variables: { income: {id: Number(assetData.id), source: inputState.employerName, amount: Number(inputState.salary), type: 'salary' }}});
+    if (incomeData) {
+      await updateIncome({ variables: { income: {id: Number(incomeData.id), source: inputState.employerName, amount: Number(inputState.salary), type: 'salary' }}});
       onForward();
     } else {
       await createIncome({ variables: { income: {taxReturnId: data?.user.taxReturns?.[0].id, source: inputState.employerName, amount: Number(inputState.salary), type: 'salary' }}});
@@ -158,10 +158,10 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
               backgroundColor="white"
               maxLength={4}
               name="Input"
-              placeholder={formatter.format(salary ?? 0) + ' kr.'}
+              value={formatter.format(salary ?? 0) + ' kr.'}
               rows={0}
               size="xs"
-              type="number"
+              type="text"
             />
           </GridColumn>
         </GridRow>

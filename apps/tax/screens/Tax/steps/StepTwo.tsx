@@ -1,4 +1,4 @@
-import { useQuery} from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 
 import {
   AlertMessage,
@@ -13,7 +13,7 @@ import { fieldWrapper } from '@island.is/tax/screens/Tax/steps/StepTwo.css'
 
 import {GetUserQuery} from '../../../graphql/schema'
 import { withApollo } from "../../../graphql/withApollo";
-import { GET_USER_QUERY } from "../../queries";
+import { CREATE_TAX_RETURN_MUTATION, GET_USER_QUERY } from '../../queries'
 import Buttons from '../Buttons'
 
 type StepTwoProps = {
@@ -22,12 +22,20 @@ type StepTwoProps = {
 }
 
 const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
+  const [createTaxReturn] = useMutation(CREATE_TAX_RETURN_MUTATION);
   const { data } = useQuery<GetUserQuery>(GET_USER_QUERY, {
     variables: {
       // Getting user id from local storage demo purpose
       id: Number(localStorage.getItem('session_token')),
     },
   });
+
+  const onNext = async () => {
+    if (!data?.user.taxReturns || data.user.taxReturns.length === 0) {
+      await createTaxReturn({ variables: { taxReturn: {userId: Number(data?.user.id), year: 2025, status: 'draft' }}});
+    }
+    onForward();
+  }
 
   return (
     <Box
@@ -139,7 +147,7 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
           message="Ef netfang og símanúmer er ekki rétt hér að ofan þá verður að breyta þeim upplýsingum á mínum síðum Ísland.is"
         />
       </Box>
-      <Buttons onBackward={onBackward} onForward={onForward}></Buttons>
+      <Buttons onBackward={onBackward} onForward={onNext}></Buttons>
     </Box>
   )
 }

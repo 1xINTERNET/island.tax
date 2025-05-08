@@ -15,6 +15,7 @@ import {
 
 const Login = () => {
   const [phone, setPhone] = useState('');
+  const [isError, setIsError] = useState(false);
 
   const [fetchUser] = useLazyQuery<GetUserByPhoneQuery>(GET_USER_BY_PHONE_QUERY);
 
@@ -27,6 +28,8 @@ const Login = () => {
     if (result.data) {
       localStorage.setItem('session_token', result.data.userByPhone.id);
       void router.push('tax');
+    } else {
+      setIsError(true);
     }
   }
 
@@ -63,12 +66,16 @@ const Login = () => {
           <Text fontWeight="light" color="dark400" paddingTop={1} paddingBottom={4}>
             á mínar síður Ísland.is
           </Text>
-          <Box width='full' paddingX={7}>
-            <AlertMessage
-              type="error"
-              message="Notandi finnst ekki"
-            />
-          </Box>
+          {
+            isError && (
+              <Box width='full' paddingX={7}>
+                <AlertMessage
+                  type="error"
+                  message="Notandi finnst ekki"
+                />
+              </Box>
+            )
+          }
           <Box paddingTop={[2]} width='full' paddingX={7}>
             <Input
               backgroundColor="blue"

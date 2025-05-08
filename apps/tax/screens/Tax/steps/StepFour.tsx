@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useQuery, useMutation } from '@apollo/client'
 
 import {
   Box,
@@ -13,7 +14,11 @@ import {
 import { InputController } from '@island.is/shared/form-fields'
 import { REQUIRED_ERROR_MESSAGE } from '@island.is/tax/constants'
 
+import {GetUserQuery} from '../../../graphql/schema'
+import { withApollo } from "../../../graphql/withApollo";
+import { CREATE_ASSET_MUTATION, GET_USER_QUERY, UPDATE_ASSET_MUTATION } from '../../queries'
 import Buttons from '../Buttons'
+import { useEffect, useMemo } from 'react'
 
 type StepFourProps = {
   onForward: () => void
@@ -26,12 +31,43 @@ interface InputState {
   propertyValue: string
 }
 
-const StepFour = ({ onForward, onBackward }: StepFourProps) => {
-  const { control, handleSubmit, formState } = useForm<InputState>()
+const formatter = new Intl.NumberFormat('is-IS', {
+  style: 'decimal',
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0
+});
 
-  const onSubmit = (inputState: InputState) => {
-    onForward()
-    console.log(inputState)
+const StepFour = ({ onForward, onBackward }: StepFourProps) => {
+  const { control, handleSubmit, formState, setValue, watch } = useForm<InputState>();
+  const [createAsset] = useMutation(CREATE_ASSET_MUTATION);
+  const [updateAsset] = useMutation(UPDATE_ASSET_MUTATION);
+  const { data } = useQuery<GetUserQuery>(GET_USER_QUERY, {
+    variables: {
+      // Getting user id from local storage demo purpose
+      id: Number(localStorage.getItem('session_token')),
+    },
+  });
+
+  const assetData = useMemo(() => data?.user.taxReturns?.[0]?.assets?.[0], [data?.user.taxReturns]);
+
+  useEffect(() => {
+    if (assetData) {
+      setValue('assetNumber', assetData.assetId ?? '')
+      setValue('propertyLocation', assetData.address ?? '')
+      setValue('propertyValue', assetData.value? assetData.value.toString() : '')
+    }
+  }, [assetData, setValue]);
+
+  const propertyValue = watch('propertyValue');
+
+  const onSubmit = async (inputState: InputState) => {
+    if (assetData) {
+      await updateAsset({ variables: { asset: {id: Number(assetData.id), assetId: inputState.assetNumber, address: inputState.propertyLocation, value: Number(inputState.propertyValue) }}});
+      onForward();
+    } else {
+      await createAsset({ variables: { asset: {taxReturnId: data?.user.taxReturns?.[0].id, assetId: inputState.assetNumber, address: inputState.propertyLocation, value: Number(inputState.propertyValue) }}});
+      onForward();
+    }
   }
 
   return (
@@ -153,10 +189,10 @@ const StepFour = ({ onForward, onBackward }: StepFourProps) => {
               backgroundColor="white"
               maxLength={4}
               name="Input"
-              placeholder="10.260.000 kr."
+              value={formatter.format(propertyValue? Number(propertyValue):0) + ' kr.'}
               rows={0}
               size="xs"
-              type="number"
+              type="text"
             />
           </GridColumn>
         </GridRow>
@@ -169,4 +205,4 @@ const StepFour = ({ onForward, onBackward }: StepFourProps) => {
   )
 }
 
-export default StepFour
+export default withApollo(StepFour)
