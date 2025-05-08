@@ -1,0 +1,24 @@
+schema:
+  - apps/tax/graphql/taxSchema.graphql
+documents: apps/tax/screens/queries/*.{ts,tsx}
+generates:
+  apps/tax/graphql/schema.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+    config:
+      exportFragmentSpreadSubTypes: true
+      scalars:
+        DateTime: Date
+        JSON: '{ [key: string]: any }'
+      namingConvention:
+        typeNames: change-case#pascalCase
+  apps/tax/graphql/fragmentTypes.json:
+    plugins:
+      - fragment-matcher
+    config:
+      module: commonjs
+      apolloClientVersion: 3
+hooks:
+  afterAllFileWrite:
+    - prettier --write
