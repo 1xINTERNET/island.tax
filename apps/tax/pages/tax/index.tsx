@@ -2,13 +2,7 @@ import React, { useState } from 'react'
 
 import { Box, FormStepperV2, Section } from '@island.is/island-ui/core'
 import FormStepsLayout from '@island.is/tax/screens/Layouts/FormStepsLayout'
-import StepFive from '@island.is/tax/screens/Tax/steps/StepFive'
-import StepFour from '@island.is/tax/screens/Tax/steps/StepFour'
-import StepOne from '@island.is/tax/screens/Tax/steps/StepOne'
-import StepSeven from '@island.is/tax/screens/Tax/steps/StepSeven'
-import StepSix from '@island.is/tax/screens/Tax/steps/StepSix'
-import StepThree from '@island.is/tax/screens/Tax/steps/StepThree'
-import StepTwo from '@island.is/tax/screens/Tax/steps/StepTwo'
+import { StepFive, StepFour, StepOne, StepSeven, StepSix, StepThree, StepTwo } from '@island.is/tax/screens/Tax/steps'
 
 const steps = [
   { title: 'Gagnaöflun', index: 0 },

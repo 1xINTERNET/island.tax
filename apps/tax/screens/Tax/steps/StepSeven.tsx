@@ -1,9 +1,4 @@
-import {
-  AlertMessage,
-  Box,
-  Button,
-  Text,
-} from '@island.is/island-ui/core'
+import { AlertMessage, Box, Button, Divider, Text } from '@island.is/island-ui/core'
 
 import Buttons from '../Buttons'
 
@@ -29,13 +24,25 @@ const StepSeven = ({ onForward, onBackward }: StepSevenProps) => {
       <Text variant="h3" paddingBottom={2}>
         Þú getur nálgast álagningarseðil á mínum síðum
       </Text>
-      <Text fontWeight="light" paddingBottom={2}>
+      <Text fontWeight="light" marginBottom={10}>
         Þú getur einnig sótt stafrænt afrit af framtali, fylgiskjölum og
         álagningarseðli á mínum síðum. Þar má finna rafrænt afrit af
         skattaframtölum fyrir gjaldárin 2006 og síðar. Ef þú skilaðir ekki
         framtali er einungis álagningarseðill birtur.
       </Text>
-      <Buttons onBackward={onBackward} onForward={onForward}></Buttons>
+      <Box display="flex" justifyContent='flexEnd' marginTop={15}>
+        <Button
+          colorScheme="default"
+          iconType="filled"
+          preTextIconType="filled"
+          size="default"
+          variant="primary"
+          icon="arrowForward"
+          onClick={() => onForward()}
+        >
+          Fara á mínar síður
+        </Button>
+      </Box>
     </Box>
   )
 }

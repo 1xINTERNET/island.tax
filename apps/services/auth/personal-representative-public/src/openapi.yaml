@@ -343,11 +343,11 @@ components:
         validFrom:
           format: date-time
           type: string
-          example: 2025-05-06T09:53:25.263Z
+          example: 2025-05-07T07:13:17.918Z
         validTo:
           format: date-time
           type: string
-          example: 2025-05-08T09:53:25.263Z
+          example: 2025-05-09T07:13:17.918Z
       required:
         - code
         - description

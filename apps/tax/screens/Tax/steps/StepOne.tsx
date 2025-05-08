@@ -46,7 +46,7 @@ const StepOne = ({ onForward, onBackward }: StepOneProps) => {
         verður sótt til Skattsins.
       </Text>
 
-      <Box paddingBottom={10}>
+      <Box>
         <Checkbox
           large
           subLabel="Ég skil að ofangreind gögn verði sótt rafrænt."

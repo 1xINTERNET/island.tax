@@ -1,12 +1,16 @@
+import { useForm } from 'react-hook-form'
+
 import {
   AlertMessage,
   Box,
+  DatePicker,
   GridColumn,
   GridContainer,
   GridRow,
-  Input,
   Text,
 } from '@island.is/island-ui/core'
+import { InputController } from '@island.is/shared/form-fields'
+import { REQUIRED_ERROR_MESSAGE } from '@island.is/tax/constants'
 
 import Buttons from '../Buttons'
 
@@ -15,7 +19,25 @@ type StepFiveProps = {
   onBackward: () => void
 }
 
+interface InputState {
+  residentialLocation: string
+  loanNumber: string
+  borrowingDate: Date
+  loanTerm: number
+  lenderId: string
+  lenderName: string
+  totalPaymentsYear: number
+  nominalValue: number
+  interest: number
+  debt: number
+}
+
 const StepFive = ({ onForward, onBackward }: StepFiveProps) => {
+  const { control, handleSubmit, formState } = useForm<InputState>()
+
+  const onSubmit = (inputState: InputState) => {
+    onForward()
+  }
   return (
     <Box
       background="white"
@@ -43,10 +65,20 @@ const StepFive = ({ onForward, onBackward }: StepFiveProps) => {
         <GridRow>
           <GridColumn span={['12/12', '12/12', '6/12']}>
             <Box paddingBottom={[3]}>
-              <Input
+              <InputController
+                id="residentialLocation"
+                control={control}
+                error={formState.errors['residentialLocation']?.message}
+                rules={{
+                  required: {
+                    value: true,
+                    message: REQUIRED_ERROR_MESSAGE,
+                  },
+                }}
+                required={true}
                 backgroundColor="white"
                 label="Staðsetning íbúðarhúsnæðis"
-                name=""
+                name="residentialLocation"
                 placeholder="Bláfjallagata 12"
                 size="sm"
                 type="text"
@@ -56,10 +88,20 @@ const StepFive = ({ onForward, onBackward }: StepFiveProps) => {
 
           <GridColumn span={['12/12', '12/12', '6/12']}>
             <Box paddingBottom={[3]}>
-              <Input
+              <InputController
+                id="loanNumber"
+                control={control}
+                error={formState.errors['loanNumber']?.message}
+                required={true}
+                rules={{
+                  required: {
+                    value: true,
+                    message: REQUIRED_ERROR_MESSAGE,
+                  },
+                }}
                 backgroundColor="white"
                 label="Lánsnúmer"
-                name=""
+                name="loanNumber"
                 placeholder="56783900123"
                 size="sm"
                 type="number"
@@ -70,23 +112,33 @@ const StepFive = ({ onForward, onBackward }: StepFiveProps) => {
         <GridRow>
           <GridColumn span={['12/12', '12/12', '6/12']}>
             <Box paddingBottom={[3]}>
-              <Input
+              <DatePicker
+                id="borrowingDate"
+                required={true}
+                placeholderText="06/15/2021"
                 backgroundColor="white"
                 label="Lántökudagur"
-                name=""
-                placeholder="15.06.2021"
                 size="sm"
-                type="number"
               />
             </Box>
           </GridColumn>
 
           <GridColumn span={['12/12', '12/12', '6/12']}>
             <Box paddingBottom={[3]}>
-              <Input
+              <InputController
+                id="loanTerm"
+                control={control}
+                error={formState.errors['loanTerm']?.message}
+                required={true}
+                rules={{
+                  required: {
+                    value: true,
+                    message: REQUIRED_ERROR_MESSAGE,
+                  },
+                }}
                 backgroundColor="white"
                 label="Lánstími ár"
-                name=""
+                name="loanTerm"
                 placeholder="30"
                 size="sm"
                 type="number"
@@ -97,10 +149,20 @@ const StepFive = ({ onForward, onBackward }: StepFiveProps) => {
         <GridRow>
           <GridColumn span={['12/12', '12/12', '6/12']}>
             <Box paddingBottom={[3]}>
-              <Input
+              <InputController
+                id="lenderId"
+                control={control}
+                error={formState.errors['lenderId']?.message}
+                required={true}
+                rules={{
+                  required: {
+                    value: true,
+                    message: REQUIRED_ERROR_MESSAGE,
+                  },
+                }}
                 backgroundColor="white"
                 label="Kennitala lánveitanda"
-                name=""
+                name="lenderId"
                 placeholder="000000-0000"
                 size="sm"
                 type="number"
@@ -110,10 +172,20 @@ const StepFive = ({ onForward, onBackward }: StepFiveProps) => {
 
           <GridColumn span={['12/12', '12/12', '6/12']}>
             <Box paddingBottom={[3]}>
-              <Input
+              <InputController
+                id="lenderName"
+                control={control}
+                error={formState.errors['lenderName']?.message}
+                required={true}
+                rules={{
+                  required: {
+                    value: true,
+                    message: REQUIRED_ERROR_MESSAGE,
+                  },
+                }}
                 backgroundColor="white"
                 label="Lánveitandi"
-                name=""
+                name="lenderName"
                 placeholder="Íslandsbanki hf."
                 size="sm"
                 type="text"
@@ -122,10 +194,20 @@ const StepFive = ({ onForward, onBackward }: StepFiveProps) => {
           </GridColumn>
           <GridColumn span={['12/12', '12/12', '6/12']}>
             <Box paddingBottom={[3]}>
-              <Input
+              <InputController
+                id="totalPaymentsYear"
+                control={control}
+                error={formState.errors['totalPaymentsYear']?.message}
+                required={true}
+                rules={{
+                  required: {
+                    value: true,
+                    message: REQUIRED_ERROR_MESSAGE,
+                  },
+                }}
                 backgroundColor="white"
                 label="Heildargreiðslur ársins"
-                name=""
+                name="totalPaymentsYear"
                 placeholder="2.280.000 kr."
                 size="sm"
                 type="number"
@@ -135,10 +217,20 @@ const StepFive = ({ onForward, onBackward }: StepFiveProps) => {
 
           <GridColumn span={['12/12', '12/12', '6/12']}>
             <Box paddingBottom={[3]}>
-              <Input
+              <InputController
+                id="nominalValue"
+                control={control}
+                error={formState.errors['nominalValue']?.message}
+                required={true}
+                rules={{
+                  required: {
+                    value: true,
+                    message: REQUIRED_ERROR_MESSAGE,
+                  },
+                }}
                 backgroundColor="white"
                 label="Afborgun á nafnverði"
-                name=""
+                name="nominalValue"
                 placeholder="1.360.000 kr."
                 size="sm"
                 type="number"
@@ -147,10 +239,20 @@ const StepFive = ({ onForward, onBackward }: StepFiveProps) => {
           </GridColumn>
           <GridColumn span={['12/12', '12/12', '6/12']}>
             <Box paddingBottom={[3]}>
-              <Input
+              <InputController
+                id="interest"
+                control={control}
+                error={formState.errors['interest']?.message}
+                required={true}
+                rules={{
+                  required: {
+                    value: true,
+                    message: REQUIRED_ERROR_MESSAGE,
+                  },
+                }}
                 backgroundColor="white"
                 label="Vaxtagjöld"
-                name=""
+                name="interest"
                 placeholder="920.000 kr."
                 size="sm"
                 type="number"
@@ -160,10 +262,20 @@ const StepFive = ({ onForward, onBackward }: StepFiveProps) => {
 
           <GridColumn span={['12/12', '12/12', '6/12']}>
             <Box paddingBottom={[3]}>
-              <Input
+              <InputController
+                id="debt"
+                control={control}
+                error={formState.errors['debt']?.message}
+                required={true}
+                rules={{
+                  required: {
+                    value: true,
+                    message: REQUIRED_ERROR_MESSAGE,
+                  },
+                }}
                 backgroundColor="white"
                 label="Eftirstöðvar skulda"
-                name=""
+                name="debt"
                 placeholder="28.540.000 kr."
                 size="sm"
                 type="number"
@@ -172,7 +284,10 @@ const StepFive = ({ onForward, onBackward }: StepFiveProps) => {
           </GridColumn>
         </GridRow>
       </GridContainer>
-      <Buttons onBackward={onBackward} onForward={onForward}></Buttons>
+      <Buttons
+        onBackward={onBackward}
+        onForward={handleSubmit(onSubmit)}
+      ></Buttons>
     </Box>
   )
 }

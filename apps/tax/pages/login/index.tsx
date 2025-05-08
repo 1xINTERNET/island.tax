@@ -1,24 +1,38 @@
-import React from 'react'
+import React, {useState} from 'react'
 import router from 'next/router'
+import {
+  useLazyQuery,
+} from "@apollo/client";
 
 import { AlertMessage, Box, Button, Checkbox, Input, Link, Logo, Text } from '@island.is/island-ui/core'
 import { formWrapper } from '@island.is/tax/screens/Tax/login/Login.css'
 
-export async function getServerSideProps() {
-  const taxData = {
-    country: 'test',
-    vatRate: 10,
-    description: 'test',
+import {GetUserByPhoneQuery} from '../../graphql/schema'
+import { withApollo } from "../../graphql/withApollo";
+import {
+  GET_USER_BY_PHONE_QUERY,
+} from "../../screens/queries";
+
+const Login = () => {
+  const [phone, setPhone] = useState('');
+  const [isError, setIsError] = useState(false);
+
+  const [fetchUser] = useLazyQuery<GetUserByPhoneQuery>(GET_USER_BY_PHONE_QUERY);
+
+  const onLogin = async () => {
+    const result = await fetchUser({
+      variables: {
+        phone,
+      },
+    });
+    if (result.data) {
+      localStorage.setItem('session_token', result.data.userByPhone.id);
+      void router.push('tax');
+    } else {
+      setIsError(true);
+    }
   }
 
-  return {
-    props: {
-      taxInfo: taxData,
-    },
-  }
-}
-
-const Login = ({ loginInfo }) => {
   return (
     <Box className={formWrapper}>
       <Box
@@ -52,12 +66,16 @@ const Login = ({ loginInfo }) => {
           <Text fontWeight="light" color="dark400" paddingTop={1} paddingBottom={4}>
             á mínar síður Ísland.is
           </Text>
-          <Box width='full' paddingX={7}>
-            <AlertMessage
-              type="error"
-              message="Notandi finnst ekki"
-            />
-          </Box>
+          {
+            isError && (
+              <Box width='full' paddingX={7}>
+                <AlertMessage
+                  type="error"
+                  message="Notandi finnst ekki"
+                />
+              </Box>
+            )
+          }
           <Box paddingTop={[2]} width='full' paddingX={7}>
             <Input
               backgroundColor="blue"
@@ -65,7 +83,9 @@ const Login = ({ loginInfo }) => {
               name=""
               size="sm"
               placeholder="000-0000"
-              type="number"
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </Box>
           <Box paddingTop={[4]}>
@@ -78,7 +98,7 @@ const Login = ({ loginInfo }) => {
               colorScheme="default"
               fluid
               variant="primary"
-              onClick={() => router.push('tax')}
+              onClick={onLogin}
             >
               Auðkenna
             </Button>
@@ -133,4 +153,4 @@ const Login = ({ loginInfo }) => {
   )
 }
 
-export default Login
+export default withApollo(Login);

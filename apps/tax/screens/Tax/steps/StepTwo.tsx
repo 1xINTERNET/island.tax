@@ -1,3 +1,5 @@
+import { useQuery, useMutation } from '@apollo/client'
+
 import {
   AlertMessage,
   Box,
@@ -9,6 +11,9 @@ import {
 } from '@island.is/island-ui/core'
 import { fieldWrapper } from '@island.is/tax/screens/Tax/steps/StepTwo.css'
 
+import {GetUserQuery} from '../../../graphql/schema'
+import { withApollo } from "../../../graphql/withApollo";
+import { CREATE_TAX_RETURN_MUTATION, GET_USER_QUERY } from '../../queries'
 import Buttons from '../Buttons'
 
 type StepTwoProps = {
@@ -17,6 +22,21 @@ type StepTwoProps = {
 }
 
 const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
+  const [createTaxReturn] = useMutation(CREATE_TAX_RETURN_MUTATION);
+  const { data } = useQuery<GetUserQuery>(GET_USER_QUERY, {
+    variables: {
+      // Getting user id from local storage demo purpose
+      id: Number(localStorage.getItem('session_token')),
+    },
+  });
+
+  const onNext = async () => {
+    if (!data?.user.taxReturns || data.user.taxReturns.length === 0) {
+      await createTaxReturn({ variables: { taxReturn: {userId: Number(data?.user.id), year: 2025, status: 'draft' }}});
+    }
+    onForward();
+  }
+
   return (
     <Box
       background="white"
@@ -36,7 +56,7 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
               backgroundColor="white"
               label="Fullt nafn"
               name=""
-              value="Jökull Þórðarson"
+              value={data?.user.firstName + ' ' + data?.user.lastName}
               size="sm"
               type="text"
             />
@@ -48,11 +68,11 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
             <Input
               disabled
               backgroundColor="white"
-              label="Póstnúmer"
+              label="Kennitala"
               name=""
-              value="1203894569"
+              value={data?.user.ssn}
               size="sm"
-              type="number"
+              type="text"
             />
           </GridColumn>
 
@@ -62,7 +82,7 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
               backgroundColor="white"
               label="Heimili"
               name=""
-              value="Bláfjallagata 12"
+              value={data?.user.streetAndHouseNumber ?? ""}
               size="sm"
               type="text"
             />
@@ -75,7 +95,7 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
               backgroundColor="white"
               label="Póstnúmer"
               name=""
-              value="105"
+              value={data?.user.postalCode ?? 0}
               size="sm"
               type="number"
             />
@@ -87,7 +107,7 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
               backgroundColor="white"
               label="Sveitarfélag"
               name=""
-              value="Reykjavík"
+              value={data?.user.city ?? ""}
               size="sm"
               type="text"
             />
@@ -100,9 +120,10 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
               backgroundColor="white"
               label="Netfang "
               name=""
-              value="jokull.thordarson@email.is"
+              value={data?.user.email ?? ""}
               size="sm"
               type="email"
+              autoComplete="off"
             />
           </GridColumn>
 
@@ -112,7 +133,7 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
               backgroundColor="white"
               label="Símanúmer"
               name=""
-              value="+354 772-8391"
+              value={data?.user.phone ?? ""}
               size="sm"
               type="tel"
             />
@@ -126,9 +147,9 @@ const StepTwo = ({ onForward, onBackward }: StepTwoProps) => {
           message="Ef netfang og símanúmer er ekki rétt hér að ofan þá verður að breyta þeim upplýsingum á mínum síðum Ísland.is"
         />
       </Box>
-      <Buttons onBackward={onBackward} onForward={onForward}></Buttons>
+      <Buttons onBackward={onBackward} onForward={onNext}></Buttons>
     </Box>
   )
 }
 
-export default StepTwo
+export default withApollo(StepTwo);
