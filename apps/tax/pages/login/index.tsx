@@ -1,7 +1,7 @@
 import React from 'react'
 import router from 'next/router'
 
-import { Box, Button, Input, Link, Logo, Text } from '@island.is/island-ui/core'
+import { AlertMessage, Box, Button, Checkbox, Input, Link, Logo, Text } from '@island.is/island-ui/core'
 import { formWrapper } from '@island.is/tax/screens/Tax/login/Login.css'
 
 export async function getServerSideProps() {
@@ -34,6 +34,7 @@ const Login = ({ loginInfo }) => {
           flexDirection="column"
           display="flex"
           alignItems="center"
+          width='full'
         >
           <Logo iconOnly width={40} />
 
@@ -48,19 +49,31 @@ const Login = ({ loginInfo }) => {
           <Text variant="h1" as="h1">
             Skráðu þig inn
           </Text>
-          <Text fontWeight="light" color="dark400" paddingBottom={4}>
+          <Text fontWeight="light" color="dark400" paddingTop={1} paddingBottom={4}>
             á mínar síður Ísland.is
           </Text>
-
-          <Input
-            backgroundColor="blue"
-            label="Símanúmer"
-            name=""
-            size="sm"
-            placeholder="000-0000"
-            type="number"
-          />
-          <Box paddingTop={[4]} paddingBottom={[7]}>
+          <Box width='full' paddingX={7}>
+            <AlertMessage
+              type="error"
+              message="Notandi finnst ekki"
+            />
+          </Box>
+          <Box paddingTop={[2]} width='full' paddingX={7}>
+            <Input
+              backgroundColor="blue"
+              label="Símanúmer"
+              name=""
+              size="sm"
+              placeholder="000-0000"
+              type="number"
+            />
+          </Box>
+          <Box paddingTop={[4]}>
+            <Checkbox
+              label="Muna símanúmer"
+            />
+          </Box>
+          <Box paddingTop={[4]} paddingBottom={[7]} paddingX={7} width='full'>
             <Button
               colorScheme="default"
               fluid
@@ -75,21 +88,21 @@ const Login = ({ loginInfo }) => {
         <Box
           paddingTop={[3]}
           paddingBottom={[6]}
-          background="blue100"
+          paddingX={[8]}
           width="full"
           display="flex"
           flexDirection="column"
           alignItems="center"
         >
-          <Text variant="h3" color="blue600" paddingBottom={[3]}>
-            Fleiri leiðir
+          <Text paddingBottom={[3]}>
+            Eða skráðu þig inn með
           </Text>
-          <Box paddingBottom={[3]} width="half">
+          <Box paddingBottom={[3]} width="full">
             <Button colorScheme="default" fluid size="default" variant="ghost">
               Auðkenni-appið
             </Button>
           </Box>
-          <Box paddingBottom={[3]} width="half">
+          <Box paddingBottom={[3]} width="full">
             <Button colorScheme="default" fluid size="default" variant="ghost">
               Skilríki á korti
             </Button>
@@ -103,11 +116,18 @@ const Login = ({ loginInfo }) => {
         paddingY={1}
       >
         <Link href="/" color="blue400" underline="normal">
-          English
+          Skilmálar
         </Link>
-        <Link href="/" color="blue400" underline="normal">
-          Þarftu aðstoð?
-        </Link>
+        <Box display="flex">
+          <Link href="/" color="blue400" underline="normal">
+            English
+          </Link>
+          <Box paddingLeft={[3]}>
+            <Link href="/" color="blue400" underline="normal">
+              Aðstoð
+            </Link>
+          </Box>
+        </Box>
       </Box>
     </Box>
   )

@@ -85,6 +85,16 @@ const StepFour = ({ onForward, onBackward }: StepFourProps) => {
           </GridColumn>
         </GridRow>
       </GridContainer>
+      <Button
+        colorScheme="default"
+        iconType="filled"
+        icon="add"
+        preTextIconType="filled"
+        size="default"
+        variant="text"
+      >
+        Bæta við línu
+      </Button>
       <Buttons onBackward={onBackward} onForward={onForward}></Buttons>
     </Box>
   )
