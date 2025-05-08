@@ -1,5 +1,6 @@
+import { useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
-import { useQuery, useMutation } from '@apollo/client'
+import { useMutation,useQuery } from '@apollo/client'
 
 import {
   Box,
@@ -18,7 +19,6 @@ import {GetUserQuery} from '../../../graphql/schema'
 import { withApollo } from "../../../graphql/withApollo";
 import { CREATE_ASSET_MUTATION, GET_USER_QUERY, UPDATE_ASSET_MUTATION } from '../../queries'
 import Buttons from '../Buttons'
-import { useEffect, useMemo } from 'react'
 
 type StepFourProps = {
   onForward: () => void
@@ -131,7 +131,7 @@ const StepFour = ({ onForward, onBackward }: StepFourProps) => {
               rows={0}
               size="xs"
               type="text"
-              error={formState.errors['assetNumber']?.message}
+              error={formState.errors['propertyLocation']?.message}
               rules={{
                 required: {
                   value: true,
@@ -154,7 +154,7 @@ const StepFour = ({ onForward, onBackward }: StepFourProps) => {
                 rows={0}
                 size="xs"
                 type="number"
-                error={formState.errors['assetNumber']?.message}
+                error={formState.errors['propertyValue']?.message}
                 rules={{
                   required: {
                     value: true,
