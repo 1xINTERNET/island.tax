@@ -17,3 +17,4 @@ export const PRELOADED_FONTS = [
   '/fonts/ibm-plex-sans-v7-latin-500.woff2',
   '/fonts/ibm-plex-sans-v7-latin-600.woff2',
 ]
+export const REQUIRED_ERROR_MESSAGE = 'nauðsynlegur reitur'

@@ -13,6 +13,7 @@ import {
   Text,
 } from '@island.is/island-ui/core'
 import { InputController } from '@island.is/shared/form-fields'
+import { REQUIRED_ERROR_MESSAGE } from '@island.is/tax/constants'
 
 import {GetUserQuery} from '../../../graphql/schema'
 import { withApollo } from "../../../graphql/withApollo";
@@ -98,7 +99,7 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
               rules={{
                 required: {
                   value: true,
-                  message: 'Áskilið reitur',
+                  message: REQUIRED_ERROR_MESSAGE,
                 },
               }}
             />
@@ -113,7 +114,7 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
                 id="salary"
                 control={control}
                 backgroundColor="blue"
-                maxLength={4}
+                maxLength={20}
                 required={true}
                 name="salary"
                 placeholder="9.360.000 kr."
@@ -124,7 +125,7 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
                 rules={{
                   required: {
                     value: true,
-                    message: 'Áskilið reitur',
+                    message: REQUIRED_ERROR_MESSAGE,
                   },
                 }}
               />
@@ -147,7 +148,7 @@ const StepThree = ({ onForward, onBackward }: StepThreeProps) => {
         Bæta við línu
       </Button>
 
-      <Box paddingY={2}>
+      <Box paddingY={4}>
         <Divider />
       </Box>
       <GridContainer>

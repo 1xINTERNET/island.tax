@@ -85,7 +85,7 @@ const StepFive = ({ onForward, onBackward }: StepFiveProps) => {
             <Box paddingBottom={[3]}>
               <Input
                 backgroundColor="white"
-                label="SLánstími ár"
+                label="Lánstími ár"
                 name=""
                 placeholder="30"
                 size="sm"
@@ -99,11 +99,11 @@ const StepFive = ({ onForward, onBackward }: StepFiveProps) => {
             <Box paddingBottom={[3]}>
               <Input
                 backgroundColor="white"
-                label="Lánveitandi"
+                label="Kennitala lánveitanda"
                 name=""
-                placeholder="Íslandsbanki hf."
+                placeholder="000000-0000"
                 size="sm"
-                type="text"
+                type="number"
               />
             </Box>
           </GridColumn>
@@ -112,11 +112,11 @@ const StepFive = ({ onForward, onBackward }: StepFiveProps) => {
             <Box paddingBottom={[3]}>
               <Input
                 backgroundColor="white"
-                label="Kennitala lánveitanda"
+                label="Lánveitandi"
                 name=""
-                placeholder="000000-0000"
+                placeholder="Íslandsbanki hf."
                 size="sm"
-                type="number"
+                type="text"
               />
             </Box>
           </GridColumn>
@@ -134,35 +134,41 @@ const StepFive = ({ onForward, onBackward }: StepFiveProps) => {
           </GridColumn>
 
           <GridColumn span={['12/12', '12/12', '6/12']}>
-            <Input
-              backgroundColor="white"
-              label="Afborgun á nafnverði"
-              name=""
-              placeholder="1.360.000 kr."
-              size="sm"
-              type="number"
-            />
+            <Box paddingBottom={[3]}>
+              <Input
+                backgroundColor="white"
+                label="Afborgun á nafnverði"
+                name=""
+                placeholder="1.360.000 kr."
+                size="sm"
+                type="number"
+              />
+            </Box>
           </GridColumn>
           <GridColumn span={['12/12', '12/12', '6/12']}>
-            <Input
-              backgroundColor="white"
-              label="Vaxtagjöld"
-              name=""
-              placeholder="920.000 kr."
-              size="sm"
-              type="number"
-            />
+            <Box paddingBottom={[3]}>
+              <Input
+                backgroundColor="white"
+                label="Vaxtagjöld"
+                name=""
+                placeholder="920.000 kr."
+                size="sm"
+                type="number"
+              />
+            </Box>
           </GridColumn>
 
           <GridColumn span={['12/12', '12/12', '6/12']}>
-            <Input
-              backgroundColor="white"
-              label="Eftirstöðvar skulda"
-              name=""
-              placeholder="28.540.000 kr."
-              size="sm"
-              type="number"
-            />
+            <Box paddingBottom={[3]}>
+              <Input
+                backgroundColor="white"
+                label="Eftirstöðvar skulda"
+                name=""
+                placeholder="28.540.000 kr."
+                size="sm"
+                type="number"
+              />
+            </Box>
           </GridColumn>
         </GridRow>
       </GridContainer>
