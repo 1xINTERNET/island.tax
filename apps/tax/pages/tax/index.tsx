@@ -14,21 +14,7 @@ const steps = [
   { title: 'Staðfesting', index: 6 },
 ]
 
-export async function getServerSideProps() {
-  const taxData = {
-    country: 'test',
-    vatRate: 10,
-    description: 'test',
-  }
-
-  return {
-    props: {
-      taxInfo: taxData,
-    },
-  }
-}
-
-const Tax = ({ taxInfo }) => {
+const Tax = () => {
   const [currentStep, setCurrentStep] = useState(0)
 
   const renderStep = (step: number) => {
