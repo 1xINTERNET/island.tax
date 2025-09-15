@@ -1,0 +1,29 @@
+{
+  "name": "clients-tax-api",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/clients/tax-api/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/clients/tax-api",
+        "main": "libs/clients/tax-api/src/index.ts",
+        "tsConfig": "libs/clients/tax-api/tsconfig.lib.json",
+        "assets": ["libs/clients/tax-api/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/clients/tax-api/jest.config.ts"
+      }
+    }
+  }
+}

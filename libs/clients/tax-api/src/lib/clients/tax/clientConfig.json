@@ -1,0 +1,440 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/me/taxes": {
+      "get": {
+        "description": "New endpoint",
+        "responses": {
+          "200": {
+            "description": "New response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "MeTaxController_getAllTaxes",
+        "description": "Get all tax submissions for a user",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/TaxDto" }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HttpProblemResponse" }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HttpProblemResponse" }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HttpProblemResponse" }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HttpProblemResponse" }
+              }
+            }
+          }
+        },
+        "tags": ["me/taxes"]
+      }
+    },
+    "/v1/me/taxes/income": {
+      "get": {
+        "operationId": "MeTaxController_getIncomes",
+        "description": "Get overview of taxes submitted by a user",
+        "parameters": [
+          {
+            "name": "locale",
+            "required": false,
+            "in": "query",
+            "schema": { "enum": ["en", "is"], "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TaxesTaxDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HttpProblemResponse" }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HttpProblemResponse" }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HttpProblemResponse" }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HttpProblemResponse" }
+              }
+            }
+          }
+        },
+        "tags": ["me/taxes"]
+      }
+    },
+    "/*": {
+      "get": {
+        "operationId": "VisualizerController_getVisualizer",
+        "parameters": [],
+        "responses": { "200": { "description": "" } }
+      }
+    }
+  },
+  "info": {
+    "title": "Tax Authorities API",
+    "description": "The api provides access to information about individuals' tax status and their administered taxes.",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://identity-server.dev01.devland.is/connect/authorize",
+            "tokenUrl": "https://identity-server.dev01.devland.is/connect/token",
+            "scopes": {
+              "openid": "openid",
+              "tax": "tax",
+              "@landlaeknir.is/taxes:admin": "Manage tax data",
+              "@landlaeknir.is/taxes": "Get tax data for a user",
+              "@landlaeknir.is/taxes:read": "Get tax data"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "TaxDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number" },
+          "nationalId": { "type": "string", "example": "1234567890" },
+          "taxDate": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2021-01-01"
+          },
+          "taxLocation": { "type": "string" },
+          "taxAge": {
+            "type": "object",
+            "example": { "years": 1, "months": 2 }
+          },
+          "generalComment": { "type": "string" },
+          "rejected": { "type": "boolean", "example": false }
+        },
+        "required": [
+          "id",
+          "nationalId",
+          "vaccineCode",
+          "vaccineCodingSystem",
+          "vaccineCodeDescription",
+          "vaccineCodeDescriptionShort",
+          "taxDate",
+          "taxLocation",
+          "taxAge",
+          "rejected"
+        ]
+      },
+      "HttpProblemResponse": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "object",
+            "description": "A URI reference that identifies the problem type"
+          },
+          "title": {
+            "type": "string",
+            "description": "A short, human-readable summary of the problem type"
+          },
+          "status": { "type": "number", "description": "The HTTP status code" },
+          "detail": {
+            "type": "string",
+            "description": "A human-readable explanation specific to this occurrence of the problem"
+          },
+          "instance": {
+            "type": "string",
+            "description": "A URI reference that identifies the specific occurrence of the problem."
+          }
+        },
+        "required": ["type", "title"]
+      },
+      "TaxesStatusColor": {
+        "type": "string",
+        "enum": ["green", "yellow", "red"]
+      },
+      "TaxesTaxDto": {
+        "type": "object",
+        "properties": {
+          "diseaseId": { "type": "string", "example": "tetanus" },
+          "diseaseName": { "type": "string", "example": "Stífkrampi" },
+          "diseaseDescription": { "type": "string" },
+          "isFeatured": {
+            "type": "boolean",
+            "description": "Is the tax scheduled as in \"almenn bólusetning\""
+          },
+          "taxStatus": {
+            "type": "string",
+            "example": "tax",
+            "enum": [
+              "valid",
+              "expired",
+              "complete",
+              "incomplete"
+            ]
+          },
+          "taxStatusName": { "type": "string", "example": "Í gildi" },
+          "taxStatusColor": {
+            "$ref": "#/components/schemas/TaxesStatusColor"
+          },
+          "lastTaxDate": { "format": "date-time", "type": "string" },
+          "taxs": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaxDto" }
+          },
+          "comments": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": [
+          "diseaseId",
+          "diseaseName",
+          "isFeatured",
+          "taxs",
+          "comments"
+        ]
+      },
+      "TaxDto": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "string" },
+          "codingSystem": { "type": "string", "example": "ATC" },
+          "diseaseId": { "type": "string" },
+          "useInCalculations": { "type": "boolean" }
+        },
+        "required": ["code", "codingSystem", "diseaseId", "useInCalculations"]
+      },
+      "Locale": { "type": "string", "enum": ["en", "is"] },
+      "DiseaseRuleTranslationDto": {
+        "type": "object",
+        "properties": {
+          "locale": { "$ref": "#/components/schemas/Locale" },
+          "comment": { "type": "string" }
+        },
+        "required": ["locale", "comment"]
+      },
+      "TaxRuleDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number" },
+          "diseaseId": { "type": "string" },
+          "order": { "type": "number" },
+          "type": { "type": "object" },
+          "vaccineCodes": { "type": "string" },
+          "cond1Type": { "type": "string" },
+          "cond1Min": { "type": "number" },
+          "cond1Max": { "type": "number" },
+          "cond2Type": { "type": "string" },
+          "cond2Min": { "type": "number" },
+          "cond2Max": { "type": "number" },
+          "cond3Type": { "type": "string" },
+          "cond3Min": { "type": "number" },
+          "cond3Max": { "type": "number" },
+          "status": { "type": "string" },
+          "statusName": { "type": "string" },
+          "internalComment": { "type": "string" },
+          "publicComment": { "type": "string" },
+          "translations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiseaseRuleTranslationDto"
+            }
+          }
+        },
+        "required": ["id", "diseaseId", "order", "type", "translations"]
+      },
+      "TaxTranslationDto": {
+        "type": "object",
+        "properties": {
+          "locale": { "$ref": "#/components/schemas/Locale" },
+          "name": { "type": "string" },
+          "description": { "type": "object" }
+        },
+        "required": ["locale", "name", "description"]
+      },
+      "DiseaseDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "isFeatured": { "type": "boolean" },
+          "isVisible": { "type": "boolean" },
+          "hideIfNoTaxs": { "type": "boolean" },
+          "taxes": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaxDto" }
+          },
+          "rules": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaxRuleDto" }
+          },
+          "translations": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaxTranslationDto" }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "isFeatured",
+          "isVisible",
+          "hideIfNoTaxs",
+          "vaccines",
+          "rules",
+          "translations"
+        ]
+      },
+      "UpdateDiseaseDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "isFeatured": { "type": "boolean" },
+          "isVisible": { "type": "boolean" },
+          "hideIfNoTaxs": { "type": "boolean" },
+          "vaccines": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaxDto" }
+          },
+          "rules": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaxRuleDto" }
+          },
+          "translations": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TaxTranslationDto" }
+          }
+        }
+      },
+      "CreateTaxRuleDto": {
+        "type": "object",
+        "properties": {
+          "order": { "type": "number" },
+          "type": { "type": "object" },
+          "vaccineCodes": { "type": "string" },
+          "cond1Type": { "type": "string" },
+          "cond1Min": { "type": "number" },
+          "cond1Max": { "type": "number" },
+          "cond2Type": { "type": "string" },
+          "cond2Min": { "type": "number" },
+          "cond2Max": { "type": "number" },
+          "cond3Type": { "type": "string" },
+          "cond3Min": { "type": "number" },
+          "cond3Max": { "type": "number" },
+          "status": { "type": "string" },
+          "statusName": { "type": "string" },
+          "internalComment": { "type": "string" },
+          "publicComment": { "type": "string" },
+          "translations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiseaseRuleTranslationDto"
+            }
+          }
+        },
+        "required": ["order", "type", "translations"]
+      },
+      "UpdateTaxRuleDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number" },
+          "diseaseId": { "type": "string" },
+          "order": { "type": "number" },
+          "type": { "type": "object" },
+          "vaccineCodes": { "type": "string" },
+          "cond1Type": { "type": "string" },
+          "cond1Min": { "type": "number" },
+          "cond1Max": { "type": "number" },
+          "cond2Type": { "type": "string" },
+          "cond2Min": { "type": "number" },
+          "cond2Max": { "type": "number" },
+          "cond3Type": { "type": "string" },
+          "cond3Min": { "type": "number" },
+          "cond3Max": { "type": "number" },
+          "status": { "type": "string" },
+          "statusName": { "type": "string" },
+          "internalComment": { "type": "string" },
+          "publicComment": { "type": "string" },
+          "translations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiseaseRuleTranslationDto"
+            }
+          }
+        }
+      }
+    }
+  }
+}
